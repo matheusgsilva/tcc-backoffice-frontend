@@ -102,7 +102,7 @@ export class CompanyListComponent implements OnInit {
       this.companyService.update({
         ...this.company, document: this.company?.document.replace("-", "").replace(/\./g, "").replace("/", ""),
         cep: this.company?.cep.replace("-", "").replace(/\./g, "")
-      }).subscribe(response => {
+      }, this.company.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     this.companyDialog = false;

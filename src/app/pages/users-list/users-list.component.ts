@@ -90,7 +90,7 @@ export class UsersListComponent implements OnInit {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     else
-      this.userService.update({ ...this.user, document: this.user?.document.replace("-", "").replace(/\./g, "") }).subscribe(response => {
+      this.userService.update({ ...this.user, document: this.user?.document.replace("-", "").replace(/\./g, "") }, this.user.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     this.userDialog = false;

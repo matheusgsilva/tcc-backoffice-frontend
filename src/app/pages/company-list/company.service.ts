@@ -14,8 +14,8 @@ export class CompanyService {
     return this.http.post(environment.url + API_ENDPOINTS.COMPANY.ADD, body);
   }
 
-  update(body: any) {
-    return this.http.post(environment.url + API_ENDPOINTS.COMPANY.UPDATE, body);
+  update(body: any, guid: string) {
+    return this.http.put(environment.url + API_ENDPOINTS.COMPANY.UPDATE + guid, body);
   }
 
   updatePassword(body: any) {
@@ -43,7 +43,7 @@ export class CompanyService {
   }
 
   delete(guid: string) {
-    return this.http.get(environment.url + API_ENDPOINTS.COMPANY.DELETE + guid);
+    return this.http.delete(environment.url + API_ENDPOINTS.COMPANY.DELETE + guid);
   }
 
   list() {

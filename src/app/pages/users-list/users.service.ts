@@ -14,8 +14,8 @@ export class UsersService {
     return this.http.post(environment.url + API_ENDPOINTS.USER.ADD, body);
   }
 
-  update(body: any) {
-    return this.http.post(environment.url + API_ENDPOINTS.USER.UPDATE, body);
+  update(body: any, guid: string) {
+    return this.http.put(environment.url + API_ENDPOINTS.USER.UPDATE + guid, body);
   }
 
   updatePassword(body: any) {
@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   delete(guid: string) {
-    return this.http.get(environment.url + API_ENDPOINTS.USER.DELETE + guid);
+    return this.http.delete(environment.url + API_ENDPOINTS.USER.DELETE + guid);
   }
 
   list() {
