@@ -26,8 +26,6 @@ export class CompanyListComponent implements OnInit {
 
   selectedCompanies: Company[] = [];
 
-  submitted: boolean = false;
-
   cepResponse: CepResponse = new CepResponse();
 
   cnpjResponse: CnpjResponse = new CnpjResponse();
@@ -44,7 +42,6 @@ export class CompanyListComponent implements OnInit {
 
   openNew() {
     this.company = new Company();
-    this.submitted = false;
     this.companyDialog = true;
   }
 
@@ -91,11 +88,9 @@ export class CompanyListComponent implements OnInit {
     this.companyDialog = false;
     this.passwordDialog = false;
     this.validationDialog = false;
-    this.submitted = false;
   }
 
   saveCompany() {
-    this.submitted = true;
     if (this.companies.filter(s => s.guid == this.company?.guid).length == 0)
       this.companyService.add({
         ...this.company, document: this.company?.document.replace("-", "").replace(/\./g, "").replace("/", ""),
@@ -115,7 +110,6 @@ export class CompanyListComponent implements OnInit {
   }
 
   savePassword() {
-    this.submitted = true;
     this.companyService.updatePassword({ guid: this.company.guid, password: this.company.password }).subscribe(response => {
       this.getMessage((response as ResponseAPI).code);
     }, () => this.getMessage(404));

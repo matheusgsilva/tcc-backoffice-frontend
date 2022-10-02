@@ -21,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { SpeedDialModule } from 'primeng/speeddial';
+import { TooltipModule } from 'primeng/tooltip';
 import { routes } from './menu.routing';
 import { DocumentFormatPipe } from 'src/app/shared/document-format.pipe';
 import { CompanyListComponent } from '../company-list/company-list.component';
@@ -48,7 +49,8 @@ import { CompanyListComponent } from '../company-list/company-list.component';
     DropdownModule,
     SpeedDialModule,
     ChartModule,
-    PanelModule
+    PanelModule,
+    TooltipModule
   ],
   declarations: [
     UsersListComponent,
@@ -56,4 +58,4 @@ import { CompanyListComponent } from '../company-list/company-list.component';
     DocumentFormatPipe
   ],
 })
-export class MenuModule {}
+export class MenuModule { }

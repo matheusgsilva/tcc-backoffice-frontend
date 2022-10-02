@@ -37,19 +37,19 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 3rem">
+        <th style="width: 2%">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th pSortableColumn="name">Nome<p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="name" style="width: 18%">Nome<p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th pSortableColumn="document">CNPJ<p-sortIcon field="document"></p-sortIcon>
+        <th pSortableColumn="document" style="width: 14%">CNPJ<p-sortIcon field="document"></p-sortIcon>
         </th>
-        <th pSortableColumn="email">E-mail<p-sortIcon field="email"></p-sortIcon>
+        <th pSortableColumn="email" style="width: 18%">E-mail<p-sortIcon field="email"></p-sortIcon>
         </th>
-        <th pSortableColumn="phone">Telefone<p-sortIcon field="phone"></p-sortIcon>
+        <th pSortableColumn="phone" style="width: 10%">Telefone<p-sortIcon field="phone"></p-sortIcon>
         </th>
-        <th>Status</th>
-        <th>Ações</th>
+        <th style="width: 10%">Status</th>
+        <th style="width: 20%">Ações</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-company>
@@ -66,22 +66,25 @@
           <i class="pi pi-check" style="font-size: 2rem; color: green;" *ngIf="company.permission == 'AUTHORIZED'"></i>
         </td>
         <td>
-          <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-info"
-            (click)="validateCompany(company)" [disabled]="company.permission == 'AUTHORIZED' ? true : false"></button>
+          <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-info" style="margin-left: 5px"
+            pTooltip="Autorizar Organização" tooltipPosition="top" (click)="validateCompany(company)"
+            [disabled]="company.permission == 'AUTHORIZED' ? true : false"></button>
           <button pButton pRipple icon="pi pi-lock" class="p-button-rounded p-button-help" style="margin-left: 5px"
-            (click)="unauthorize(company)" [disabled]="company.permission == 'AUTHORIZED' ? false : true"></button>
+            pTooltip="Desautorizar Organização" tooltipPosition="top" (click)="unauthorize(company)"
+            [disabled]="company.permission == 'AUTHORIZED' ? false : true"></button>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" style="margin-left: 5px"
-            (click)="editCompany(company)"></button>
+            pTooltip="Editar Organização" tooltipPosition="top" (click)="editCompany(company)"></button>
           <button pButton pRipple icon="pi pi-lock" class="p-button-rounded p-button-warning" style="margin-left: 5px"
-            (click)="editPassword(company)"></button>
+            pTooltip="Editar Senha da Organização" tooltipPosition="top" (click)="editPassword(company)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" style="margin-left: 5px"
-            (click)="deleteCompany(company)"></button>
+            pTooltip="Excluir Organização" tooltipPosition="top" (click)="deleteCompany(company)"></button>
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="p-d-flex p-ai-center p-jc-between">
-        {{companies ? companies.length : 0 }} organizações no total.
+        {{companies ? companies.length == 1 ? companies.length + ' Organizações no total.' : companies.length + '
+        Organizações no total.' : 0 + ' Organizações no total.'}}
       </div>
     </ng-template>
   </p-table>
@@ -94,97 +97,107 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.name" required autofocus />
-            <label for="name">Nome</label>
-            <small class="p-error" *ngIf="submitted && !company.name">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.name" maxlength="100" required autofocus />
+            <label for="name">Nome*</label>
           </span>
+          <small class="p-error" *ngIf="!company.name">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.email" required />
-            <label for="email">Email</label>
-            <small class="p-error" *ngIf="submitted && !company.email">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.email" maxlength="200" required />
+            <label for="email">E-mail*</label>
           </span>
+          <small class="p-error" *ngIf="!company.email">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid">
         <div class="col-4">
           <span class="p-float-label">
             <p-inputMask [(ngModel)]="company.document" mask="99.999.999/9999-99"></p-inputMask>
-            <label for="document">Documento</label>
-            <small class="p-error" *ngIf="submitted && !company.document">Este campo é obrigatório.</small>
+            <label for="document">CNPJ*</label>
           </span>
+          <small class="p-error" *ngIf="!company.document">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
             <p-inputMask [(ngModel)]="company.phone" mask="99 99999-9999"></p-inputMask>
-            <label for="phone">Telefone</label>
-            <small class="p-error" *ngIf="submitted && !company.phone">Este campo é obrigatório.</small>
+            <label for="phone">Telefone*</label>
           </span>
+          <small class="p-error" *ngIf="!company.phone">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
             <p-inputMask [(ngModel)]="company.cep" mask="99999-999"></p-inputMask>
-            <label for="cep">CEP</label>
-            <small class="p-error" *ngIf="submitted && !company.cep">Este campo é obrigatório.</small>
+            <label for="cep">CEP*</label>
           </span>
+          <small class="p-error" *ngIf="!company.cep">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid">
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.country" required />
-            <label for="country">País</label>
-            <small class="p-error" *ngIf="submitted && !company.country">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.country" maxlength="50" required />
+            <label for="country">País*</label>
           </span>
+          <small class="p-error" *ngIf="!company.country">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.city" required />
-            <label for="city">Cidade</label>
-            <small class="p-error" *ngIf="submitted && !company.city">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.city" maxlength="50" required />
+            <label for="city">Cidade*</label>
           </span>
+          <small class="p-error" *ngIf="!company.city">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.district" required />
-            <label for="district">Bairro</label>
-            <small class="p-error" *ngIf="submitted && !company.district">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.district" maxlength="50" required />
+            <label for="district">Bairro*</label>
           </span>
+          <small class="p-error" *ngIf="!company.district">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid">
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.street" required />
-            <label for="street">Rua</label>
-            <small class="p-error" *ngIf="submitted && !company.street">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.street" maxlength="100" required />
+            <label for="street">Rua*</label>
           </span>
+          <small class="p-error" *ngIf="!company.street">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="number" pInputText [(ngModel)]="company.numberAddress" required />
-            <label for="numberAddress">Número do Endereço</label>
-            <small class="p-error" *ngIf="submitted && !company.numberAddress">Este campo é obrigatório.</small>
+            <input type="number" pInputText [(ngModel)]="company.numberAddress" maxlength="10" required />
+            <label for="numberAddress">Número do Endereço*</label>
           </span>
+          <small class="p-error" *ngIf="!company.numberAddress">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.uf" required />
-            <label for="uf">UF</label>
-            <small class="p-error" *ngIf="submitted && !company.uf">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.uf" maxlength="2" required />
+            <label for="uf">UF*</label>
           </span>
+          <small class="p-error" *ngIf="!company.uf">Este campo é obrigatório.</small>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-12">
+          <span class="p-float-label">
+            <textarea type="text" pInputText [(ngModel)]="company.description" [rows]="5" [cols]="30" maxlength="255"
+              required></textarea>
+            <label for="description">Descrição*</label>
+          </span>
+          <small class="p-error" *ngIf="!company.description">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid" *ngIf="!company.guid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText id="password" [(ngModel)]="company.password" required />
-            <label for="password">Senha</label>
-            <small class="p-error" *ngIf="submitted && !company.password">Este campo é obrigatório.</small>
+            <input type="text" pInputText id="password" [(ngModel)]="company.password" maxlength="100" required />
+            <label for="password">Senha*</label>
           </span>
+          <small class="p-error" *ngIf="!company.password">Este campo é obrigatório.</small>
         </div>
       </div>
     </div>
@@ -192,7 +205,14 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveCompany()"></button>
+    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveCompany()"
+      *ngIf="!company.guid" [disabled]="!company.name || !company.email || !company.document || !company.phone || !company.cep || !company.country
+    || !company.city || !company.district || !company.street || !company.numberAddress || !company.uf || !company.description
+    || !company.password ? true : false"></button>
+    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveCompany()"
+      *ngIf="company.guid" [disabled]="!company.name || !company.email || !company.document || !company.phone || !company.cep || !company.country
+    || !company.city || !company.district || !company.street || !company.numberAddress || !company.uf
+    || !company.description ? true : false"></button>
   </ng-template>
 </p-dialog>
 
@@ -203,10 +223,10 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.password" required />
-            <label for="password">Senha</label>
-            <small class="p-error" *ngIf="submitted && !company.password">Este campo é obrigatório.</small>
+            <input type="text" pInputText [(ngModel)]="company.password" maxlength="100" required />
+            <label for="password">Senha*</label>
           </span>
+          <small class="p-error" *ngIf="!company.password">Este campo é obrigatório.</small>
         </div>
       </div>
     </div>
@@ -214,8 +234,8 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success"
-      (click)="savePassword()"></button>
+    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="savePassword()"
+      [disabled]="!company.password ? true : false"></button>
   </ng-template>
 </p-dialog>
 
@@ -227,8 +247,8 @@
   </ng-template>
 </p-confirmDialog>
 
-<p-dialog [(visible)]="validationDialog" [style]="{width: '70vw'}" header="Validação dos Dados" [modal]="true" (onHide)="hideDialog()"
-  styleClass="p-fluid">
+<p-dialog [(visible)]="validationDialog" [style]="{width: '70vw'}" header="Validação dos Dados" [modal]="true"
+  (onHide)="hideDialog()" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <p-panel header="Dados Inseridos no Sistema pela Instituição" [style]="{'margin-top': '30px'}">
       <div class="grid">
@@ -309,10 +329,12 @@
       </div>
       <div class="grid">
         <div class="col-4">
-          <p><strong>Data da Situação Cadastral: </strong>{{cnpjResponse.estabelecimento.data_situacao_cadastral | date: 'dd/MM/yyyy'}}</p>
+          <p><strong>Data da Situação Cadastral: </strong>{{cnpjResponse.estabelecimento.data_situacao_cadastral | date:
+            'dd/MM/yyyy'}}</p>
         </div>
         <div class="col-4">
-          <p><strong>Data do Início da Atividade: </strong>{{cnpjResponse.estabelecimento.data_inicio_atividade | date: 'dd/MM/yyyy'}}</p>
+          <p><strong>Data do Início da Atividade: </strong>{{cnpjResponse.estabelecimento.data_inicio_atividade | date:
+            'dd/MM/yyyy'}}</p>
         </div>
         <div class="col-4">
           <p><strong>E-mail: </strong>{{cnpjResponse.estabelecimento.email}}</p>
@@ -355,6 +377,7 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Negar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Autorizar" icon="pi pi-check" class="p-button-success" (click)="authorize()"></button>
+    <button pButton pRipple label="Autorizar" icon="pi pi-check" class="p-button-success"
+      (click)="authorize()"></button>
   </ng-template>
 </p-dialog>

@@ -25,8 +25,6 @@ export class UsersListComponent implements OnInit {
 
   selectedUsers: User[] = [];
 
-  submitted: boolean = false;
-
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private userService: UsersService) { }
 
   ngOnInit() {
@@ -39,7 +37,6 @@ export class UsersListComponent implements OnInit {
 
   openNew() {
     this.user = new User();
-    this.submitted = false;
     this.userDialog = true;
   }
 
@@ -85,11 +82,9 @@ export class UsersListComponent implements OnInit {
   hideDialog() {
     this.userDialog = false;
     this.passwordDialog = false;
-    this.submitted = false;
   }
 
   saveUser() {
-    this.submitted = true;
     if (this.users.filter(s => s.guid == this.user?.guid).length == 0)
       this.userService.add({ ...this.user, document: this.user?.document.replace("-", "").replace(/\./g, "")}).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
@@ -103,7 +98,6 @@ export class UsersListComponent implements OnInit {
   }
 
   savePassword() {
-    this.submitted = true;
       this.userService.updatePassword({ guid: this.user.guid, password: this.user.password }).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));

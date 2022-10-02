@@ -1,5 +1,5 @@
 .content .grid{
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 ::ng-deep .p-dialog .p-dialog-header {
@@ -31,4 +31,8 @@ p{
   padding-bottom: 5px;
   padding-right: 10px;
   vertical-align: middle;
+}
+
+small{
+  font-size: 12px;
 }

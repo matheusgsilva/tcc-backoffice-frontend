@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
       {
         label: 'Cadastros', icon: PrimeIcons.CLONE, expanded: true,
         items: [
-          { label: 'Instituições', icon: PrimeIcons.BRIEFCASE, routerLink: ['/companies-list'] },
+          { label: 'Organizações', icon: PrimeIcons.BRIEFCASE, routerLink: ['/companies-list'] },
           { label: 'Usuários', icon: PrimeIcons.USERS, routerLink: ['/users-list'] },
         ]
       },

@@ -15,12 +15,12 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 768) {
+    if (this.innerWidth < 1091) {
       this.display = false;
     } else {
       this.display = true;
     }
-    if (this.display && this.innerWidth > 768)
+    if (this.display && this.innerWidth > 1091)
       this.pixels = 288;
     else
       this.pixels = 0;
@@ -35,13 +35,13 @@ export class MenuComponent implements OnInit {
   onResize(event: any) {
     if (!(event instanceof PointerEvent)) {
       this.innerWidth = window.innerWidth;
-      if (this.innerWidth < 768) {
+      if (this.innerWidth < 1091) {
         this.display = false;
       } else {
         this.display = true;
       }
     }
-    if (this.display && this.innerWidth > 768)
+    if (this.display && this.innerWidth > 1091)
       this.pixels = 288;
     else
       this.pixels = 0;
