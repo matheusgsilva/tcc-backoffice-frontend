@@ -1,0 +1,20 @@
+<div [ngStyle]="{'width': display ? '288px' : '0vw'}">
+  <div *ngIf="display" [ngStyle]="{'width': display ? '288px' : '0vw'}" [style]="{'width':'288px'}" class="sidebar">
+    <div class="p-grid img">
+      <div class="p-col-12">
+        <img src="../../../assets/logo-title.jpeg" width="100px" alt="">
+      </div>
+      <div class="p-col-12 user">
+        <img src="../../../assets/user.png" width="80px" alt="">
+        <h4>Administrador</h4>
+      </div>
+    </div>
+    <div class="p-grid menu">
+      <div class="p-col-12">
+        <p-panelMenu #menu [model]="items" [style]="{'width':'100%', 'min-width':'100%'}"></p-panelMenu>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,34 @@
+.content .grid{
+  margin-top: 30px;
+}
+
+::ng-deep .p-dialog .p-dialog-header {
+  background-color: #e9ecef;
+  color: #495057;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-header-icon {
+  color: #495057;
+}
+
+::ng-deep .p-confirm-dialog .p-dialog-content {
+  padding-top: 20px;
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+.title{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
