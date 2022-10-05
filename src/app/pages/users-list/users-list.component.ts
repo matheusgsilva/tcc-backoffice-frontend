@@ -42,7 +42,7 @@ export class UsersListComponent implements OnInit {
 
   deleteSelectedUsers() {
     this.confirmationService.confirm({
-      message: 'Você tem certeza que seja excluir os usuários selecionados?',
+      message: 'Você tem certeza que deseja excluir os usuários selecionados?',
       header: 'Atenção',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -68,7 +68,7 @@ export class UsersListComponent implements OnInit {
 
   deleteUser(user: User) {
     this.confirmationService.confirm({
-      message: 'Você tem certeza que seja excluir o usuário: ' + user.name + '?',
+      message: 'Você tem certeza que deseja excluir o usuário: ' + user.name + '?',
       header: 'Atenção',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

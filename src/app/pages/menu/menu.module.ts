@@ -25,6 +25,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { routes } from './menu.routing';
 import { DocumentFormatPipe } from 'src/app/shared/document-format.pipe';
 import { CompanyListComponent } from '../company-list/company-list.component';
+import { PetListComponent } from '../pet-list/pet-list.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import { CompanyListComponent } from '../company-list/company-list.component';
   declarations: [
     UsersListComponent,
     CompanyListComponent,
-    DocumentFormatPipe
+    DocumentFormatPipe,
+    PetListComponent
   ],
 })
 export class MenuModule { }

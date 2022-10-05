@@ -24,7 +24,7 @@
     <ng-template pTemplate="caption">
       <div class="grid">
         <div class="col">
-          <p>Gerenciar Usuários</p>
+          <p class="title">Gerenciar Usuários</p>
         </div>
         <div class="col-fixed">
           <span class="p-input-icon-left">
@@ -86,7 +86,7 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText id="name" [(ngModel)]="user.name" maxlength="100" required autofocus />
+            <input type="text" pInputText [(ngModel)]="user.name" maxlength="100" required autofocus />
             <label for="name">Nome*</label>
           </span>
           <small class="p-error" *ngIf="!user.name">Este campo é obrigatório.</small>
@@ -95,7 +95,7 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText id="email" [(ngModel)]="user.email" maxlength="200" required />
+            <input type="text" pInputText [(ngModel)]="user.email" maxlength="200" required />
             <label for="email">E-mail*</label>
           </span>
           <small class="p-error" *ngIf="!user.email">Este campo é obrigatório.</small>
@@ -120,7 +120,7 @@
       <div class="grid" *ngIf="!user.guid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText id="password" [(ngModel)]="user.password" maxlength="100" required />
+            <input type="text" pInputText [(ngModel)]="user.password" maxlength="100" required />
             <label for="password">Senha*</label>
           </span>
           <small class="p-error" *ngIf="!user.password">Este campo é obrigatório.</small>
@@ -128,7 +128,6 @@
       </div>
     </div>
   </ng-template>
-
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveUser()"
@@ -146,7 +145,7 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText id="password" [(ngModel)]="user.password" maxlength="100" required />
+            <input type="text" pInputText [(ngModel)]="user.password" maxlength="100" required />
             <label for="password">Senha*</label>
           </span>
           <small class="p-error" *ngIf="!user.password">Este campo é obrigatório.</small>
@@ -154,7 +153,6 @@
       </div>
     </div>
   </ng-template>
-
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success"
@@ -162,7 +160,7 @@
   </ng-template>
 </p-dialog>
 
-<p-confirmDialog #cd [style]="{width: '600px'}" id="cdUser">
+<p-confirmDialog #cd [style]="{width: '600px'}">
   <ng-template pTemplate="footer">
     <button type="button" pButton icon="pi pi-times" label="Não" (click)="cd.reject()" class="p-button-danger"></button>
     <button id="acceptButton" type="button" pButton icon="pi pi-check" label="Sim" (click)="cd.accept()"

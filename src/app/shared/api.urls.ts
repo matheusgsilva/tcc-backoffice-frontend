@@ -19,5 +19,12 @@ export const API_ENDPOINTS = {
     UNAUTHORIZE:"backend/api/company/unauthorize/guid/",
     CEP_CHECK:"backend/api/company/query/cep/",
     CNPJ_CHECK:"backend/api/company/query/cnpj/"
-  }
+  },
+  PET: {
+    ADD: "backend/api/pet/add",
+    UPDATE: "backend/api/pet/update/guid/",
+    DETAIL: "backend/api/pet/detail/guid/",
+    DELETE: "backend/api/pet/delete/guid/",
+    LIST: "backend/api/pet/list/companyguid/"
+  },
 };

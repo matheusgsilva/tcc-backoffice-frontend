@@ -194,7 +194,7 @@
       <div class="grid" *ngIf="!company.guid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText id="password" [(ngModel)]="company.password" maxlength="100" required />
+            <input type="text" pInputText [(ngModel)]="company.password" maxlength="100" required />
             <label for="password">Senha*</label>
           </span>
           <small class="p-error" *ngIf="!company.password">Este campo é obrigatório.</small>
@@ -202,7 +202,6 @@
       </div>
     </div>
   </ng-template>
-
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveCompany()"
@@ -231,7 +230,6 @@
       </div>
     </div>
   </ng-template>
-
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="savePassword()"
@@ -374,7 +372,6 @@
       </div>
     </p-panel>
   </ng-template>
-
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Negar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Autorizar" icon="pi pi-check" class="p-button-success"
