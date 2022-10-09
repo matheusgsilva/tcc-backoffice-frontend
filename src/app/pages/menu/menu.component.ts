@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
       this.display = true;
     }
     if (this.display && this.innerWidth > 1091)
-      this.pixels = 288;
+      this.pixels = 250;
     else
       this.pixels = 0;
   }
@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
       }
     }
     if (this.display && this.innerWidth > 1091)
-      this.pixels = 288;
+      this.pixels = 250;
     else
       this.pixels = 0;
   }

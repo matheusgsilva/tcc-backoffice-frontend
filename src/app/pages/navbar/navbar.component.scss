@@ -8,9 +8,9 @@
   transition: left 0.3s;
   position: fixed;
   right: 0;
-  left: 288px;
+  left: 250px;
   height: 50px;
-  background-color: white;
+  background-color: #afe9b6;
   color: #495057;
   border-bottom: 1px solid #e1e6ef;
   box-sizing: border-box;
@@ -27,37 +27,32 @@ button{
   margin-left: 20px;
 }
 
-/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
  .toggle {
     left: 0px;
   }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .toggle {
     left: 0px;
   }
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .toggle {
-    left: 288px;
+    left: 250px;
   }
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .toggle {
-    left: 288px;
+    left: 250px;
   }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .toggle {
-    left: 288px;
+    left: 250px;
   }
 }

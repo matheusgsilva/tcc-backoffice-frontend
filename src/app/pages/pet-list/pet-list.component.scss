@@ -1,4 +1,4 @@
-.content .grid{
+.content .grid {
   margin-top: 20px;
 }
 
@@ -21,22 +21,35 @@
   width: 100%;
 }
 
-.title{
+.title {
   font-size: 25px;
   font-weight: bold;
 }
 
-::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 10px;
   vertical-align: middle;
 }
 
-small{
+small {
   font-size: 12px;
 }
 
-.subtitle{
+.subtitle {
   margin-top: 10px;
+}
+
+::ng-deep .p-fileupload .p-fileupload-row>div {
+  width: auto;
+}
+
+::ng-deep .p-fieldset .p-fieldset-content {
+  text-align: center;
+}
+
+::ng-deep .p-image .p-image-preview {
+  max-width: 40vw;
+  max-height: 40vh;
 }

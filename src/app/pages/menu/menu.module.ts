@@ -22,10 +22,13 @@ import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { TooltipModule } from 'primeng/tooltip';
+import { FileUploadModule } from 'primeng/fileupload';
 import { routes } from './menu.routing';
 import { DocumentFormatPipe } from 'src/app/shared/document-format.pipe';
 import { CompanyListComponent } from '../company-list/company-list.component';
 import { PetListComponent } from '../pet-list/pet-list.component';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   imports: [
@@ -51,7 +54,10 @@ import { PetListComponent } from '../pet-list/pet-list.component';
     SpeedDialModule,
     ChartModule,
     PanelModule,
-    TooltipModule
+    TooltipModule,
+    FileUploadModule,
+    FieldsetModule,
+    ImageModule
   ],
   declarations: [
     UsersListComponent,

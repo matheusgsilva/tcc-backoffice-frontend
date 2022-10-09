@@ -5,7 +5,8 @@
     <ng-template pTemplate="left">
       <div class="grid">
         <div class="col-fixed">
-          <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success" (click)="openNew()" [disabled]="!selectedCompany ? true : false"></button>
+          <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success" (click)="openNew()"
+            [disabled]="!selectedCompany ? true : false"></button>
         </div>
         <div class="col-fixed">
           <button pButton pRipple label="Excluir" icon="pi pi-trash" class="p-button-danger"
@@ -35,9 +36,10 @@
         </div>
         <div class="col-2 subtitle">
           <span class="p-float-label">
-            <p-dropdown [autoDisplayFirst]="true" [options]="companies" [(ngModel)]="selectedCompany" [style]="{'width':'100%', 'height':'39px'}" (onChange)="list()"></p-dropdown>
+            <p-dropdown [autoDisplayFirst]="true" [options]="companies" [(ngModel)]="selectedCompany"
+              [style]="{'width':'100%', 'height':'39px'}" (onChange)="list()"></p-dropdown>
             <label for="dropdown">Organizações</label>
-        </span>
+          </span>
         </div>
       </div>
     </ng-template>
@@ -69,6 +71,8 @@
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
             style="margin-left: 5px" (click)="editPet(pet)" pTooltip="Editar Pet" tooltipPosition="top"></button>
+          <button pButton pRipple icon="pi pi-images" class="p-button-rounded p-button-warning" style="margin-left: 5px"
+            (click)="openImageDialog(pet.guid)" pTooltip="Editar Imagens do Pet" tooltipPosition="top"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" style="margin-left: 5px"
             (click)="deletePet(pet)" pTooltip="Excluir Pet" tooltipPosition="top"></button>
         </td>
@@ -83,8 +87,8 @@
   </p-table>
 </div>
 
-<p-dialog [(visible)]="petDialog" [style]="{width: '50vw'}" header="Dados do Usuário" [modal]="true"
-  (onHide)="hideDialog()" styleClass="p-fluid">
+<p-dialog [(visible)]="petDialog" [style]="{width: '50vw'}" header="Dados do Pet" [modal]="true" (onHide)="hideDialog()"
+  styleClass="p-fluid">
   <ng-template pTemplate="content">
     <div class="content">
       <div class="grid">
@@ -150,6 +154,69 @@
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="savePet()"
       [disabled]="!pet.name || !pet.breed || !pet.size || !pet.age ? true : false"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="petImageDialog" [style]="{width: '60vw'}" header="Upload de Imagens" [modal]="true"
+  (onHide)="hideDialog()" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="content">
+      <div class="grid">
+        <div class="col-3">
+          <p-fieldset legend="Imagem 1">
+            <div class="col-12" *ngIf="image1">
+            <p-image [src]="image1" alt="Imagem 1" height="150" [preview]="true"></p-image>
+          </div>
+          <div class="col-12">
+            <p-fileUpload #fu1 mode="basic" accept="image/*" (onBeforeUpload)="fu1.clear()" (onSelect)="onUpload($event, 1)"
+              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+            </p-fileUpload>
+          </div>
+          </p-fieldset>
+        </div>
+        <div class="col-3">
+          <p-fieldset legend="Imagem 2" *ngIf="image2">
+            <div class="col-12">
+            <p-image [src]="image2" alt="Imagem 2" height="150" [preview]="true"></p-image>
+          </div>
+          <div class="col-12">
+            <p-fileUpload #fu2 mode="basic" accept="image/*" (onBeforeUpload)="fu2.clear()" (onSelect)="onUpload($event, 2)"
+              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+            </p-fileUpload>
+          </div>
+          </p-fieldset>
+        </div>
+        <div class="col-3">
+          <p-fieldset legend="Imagem 3">
+            <div class="col-12" *ngIf="image3">
+            <p-image [src]="image3" alt="Imagem 3" height="150" [preview]="true"></p-image>
+          </div>
+          <div class="col-12">
+            <p-fileUpload #fu3 mode="basic" accept="image/*" (onBeforeUpload)="fu3.clear()" (onSelect)="onUpload($event, 3)"
+              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+            </p-fileUpload>
+          </div>
+          </p-fieldset>
+        </div>
+        <div class="col-3">
+          <p-fieldset legend="Imagem 4">
+            <div class="col-12" *ngIf="image4">
+            <p-image [src]="image4" alt="Imagem 4" height="150" [preview]="true"></p-image>
+          </div>
+          <div class="col-12">
+            <p-fileUpload #fu4 mode="basic" accept="image/*" (onBeforeUpload)="fu4.clear()" (onSelect)="onUpload($event, 4)"
+              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+            </p-fileUpload>
+          </div>
+          </p-fieldset>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="closeImageDialog()"></button>
+    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveImagesPet()"
+      [disabled]="!pet.photo1 && !pet.photo2 && !pet.photo3 && !pet.photo4 ? true : false"></button>
   </ng-template>
 </p-dialog>
 

@@ -5,7 +5,7 @@
   <app-navbar [display]="display" [pixels]="pixels" (displaySide)="displaySide($event)"></app-navbar>
  <div class="p-grid">
     <div class="p-col-12 content">
-      <div class="card" [ngStyle]="{'margin-left': display && innerWidth > 768 ? '288px' : '0px'}">
+      <div class="card" [ngStyle]="{'margin-left': display && innerWidth > 768 ? '250px' : '0px'}">
         <router-outlet></router-outlet>
       </div>
     </div>
