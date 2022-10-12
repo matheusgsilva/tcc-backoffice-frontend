@@ -98,11 +98,11 @@ export class PetListComponent implements OnInit {
 
   savePet() {
     if (this.pets.filter(s => s.guid == this.pet?.guid).length == 0)
-      this.petService.add({ ...this.pet, companyGuid: this.selectedCompany }).subscribe(response => {
+      this.petService.add({ ...this.pet }, this.selectedCompany).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     else
-      this.petService.update({ ...this.pet, companyGuid: this.selectedCompany }, this.pet.guid).subscribe(response => {
+      this.petService.update({ ...this.pet }, this.pet.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     this.petDialog = false;
@@ -111,6 +111,10 @@ export class PetListComponent implements OnInit {
 
   openImageDialog(petGuid: string) {
     this.pet = new Pet();
+    this.image1 = undefined;
+    this.image2 = undefined;
+    this.image3 = undefined;
+    this.image4 = undefined;
     this.petImageDialog = true;
     this.petService.detail(petGuid).subscribe((response => {
       this.pet = ((response as ResponseAPI).data as Pet);
@@ -171,7 +175,7 @@ export class PetListComponent implements OnInit {
 
   saveImagesPet() {
     this.petService.update({
-      ...this.pet, companyGuid: this.selectedCompany
+      ...this.pet
     },
       this.pet.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);

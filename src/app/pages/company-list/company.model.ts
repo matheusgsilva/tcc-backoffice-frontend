@@ -14,6 +14,7 @@ export class Company {
   uf: string = "";
   description: string = "";
   permission: string = "";
+  photo1: string = "";
 }
 
 export class CnpjResponse {

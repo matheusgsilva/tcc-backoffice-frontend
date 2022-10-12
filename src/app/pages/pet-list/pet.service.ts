@@ -10,8 +10,8 @@ export class PetService {
 
   constructor(private http: HttpClient) { }
 
-  add(body: any) {
-    return this.http.post(environment.url + API_ENDPOINTS.PET.ADD, body);
+  add(body: any, companyGuid: string) {
+    return this.http.post(environment.url + API_ENDPOINTS.PET.ADD + "companyguid/" + companyGuid, body);
   }
 
   update(body: any, guid: string) {

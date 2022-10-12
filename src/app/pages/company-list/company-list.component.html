@@ -72,9 +72,16 @@
           <button pButton pRipple icon="pi pi-lock" class="p-button-rounded p-button-help" style="margin-left: 5px"
             pTooltip="Desautorizar Organização" tooltipPosition="top" (click)="unauthorize(company)"
             [disabled]="company.permission == 'AUTHORIZED' ? false : true"></button>
+          <button pButton pRipple icon="pi pi-envelope" class="p-button-rounded p-button-secondary"
+            style="margin-left: 5px" [disabled]="company.permission == 'AUTHORIZED' ? false : true"
+            pTooltip="Enviar Email de Acesso" tooltipPosition="top" (click)="sendEmailAccess(company.guid)"></button>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" style="margin-left: 5px"
             pTooltip="Editar Organização" tooltipPosition="top" (click)="editCompany(company)"></button>
-          <button pButton pRipple icon="pi pi-lock" class="p-button-rounded p-button-warning" style="margin-left: 5px"
+          <button pButton pRipple icon="pi pi-images" class="p-button-rounded p-button-warning" style="margin-left: 5px"
+            (click)="openImageDialog(company.guid)" pTooltip="Editar Imagens da Organização"
+            tooltipPosition="top"></button>
+          <button pButton pRipple icon="pi pi-lock" class="p-button-rounded"
+            style="margin-left: 5px; background-color: orange; border-color: orange;"
             pTooltip="Editar Senha da Organização" tooltipPosition="top" (click)="editPassword(company)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" style="margin-left: 5px"
             pTooltip="Excluir Organização" tooltipPosition="top" (click)="deleteCompany(company)"></button>
@@ -376,5 +383,33 @@
     <button pButton pRipple label="Negar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Autorizar" icon="pi pi-check" class="p-button-success"
       (click)="authorize()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="companyImageDialog" [style]="{width: '30vw'}" header="Upload de Imagens" [modal]="true"
+  (onHide)="hideDialog()" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="content">
+      <div class="grid">
+        <div class="col-12">
+          <p-fieldset legend="Imagem 1">
+            <div class="col-12" *ngIf="image1">
+              <p-image [src]="image1" alt="Imagem 1" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu1 mode="basic" accept="image/*"
+                (onSelect)="onUpload($event, 1)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger"
+      (click)="closeImageDialog()"></button>
+    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveImagesCompany()"
+      [disabled]="!company.photo1 ? true : false"></button>
   </ng-template>
 </p-dialog>

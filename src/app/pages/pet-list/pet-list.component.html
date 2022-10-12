@@ -165,56 +165,57 @@
         <div class="col-3">
           <p-fieldset legend="Imagem 1">
             <div class="col-12" *ngIf="image1">
-            <p-image [src]="image1" alt="Imagem 1" height="150" [preview]="true"></p-image>
-          </div>
-          <div class="col-12">
-            <p-fileUpload #fu1 mode="basic" accept="image/*" (onBeforeUpload)="fu1.clear()" (onSelect)="onUpload($event, 1)"
-              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
-            </p-fileUpload>
-          </div>
+              <p-image [src]="image1" alt="Imagem 1" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu1 mode="basic" accept="image/*" (onBeforeUpload)="fu1.clear()"
+                (onSelect)="onUpload($event, 1)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
           </p-fieldset>
         </div>
         <div class="col-3">
           <p-fieldset legend="Imagem 2" *ngIf="image2">
             <div class="col-12">
-            <p-image [src]="image2" alt="Imagem 2" height="150" [preview]="true"></p-image>
-          </div>
-          <div class="col-12">
-            <p-fileUpload #fu2 mode="basic" accept="image/*" (onBeforeUpload)="fu2.clear()" (onSelect)="onUpload($event, 2)"
-              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
-            </p-fileUpload>
-          </div>
+              <p-image [src]="image2" alt="Imagem 2" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu2 mode="basic" accept="image/*" (onBeforeUpload)="fu2.clear()"
+                (onSelect)="onUpload($event, 2)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
           </p-fieldset>
         </div>
         <div class="col-3">
           <p-fieldset legend="Imagem 3">
             <div class="col-12" *ngIf="image3">
-            <p-image [src]="image3" alt="Imagem 3" height="150" [preview]="true"></p-image>
-          </div>
-          <div class="col-12">
-            <p-fileUpload #fu3 mode="basic" accept="image/*" (onBeforeUpload)="fu3.clear()" (onSelect)="onUpload($event, 3)"
-              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
-            </p-fileUpload>
-          </div>
+              <p-image [src]="image3" alt="Imagem 3" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu3 mode="basic" accept="image/*" (onBeforeUpload)="fu3.clear()"
+                (onSelect)="onUpload($event, 3)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
           </p-fieldset>
         </div>
         <div class="col-3">
           <p-fieldset legend="Imagem 4">
             <div class="col-12" *ngIf="image4">
-            <p-image [src]="image4" alt="Imagem 4" height="150" [preview]="true"></p-image>
-          </div>
-          <div class="col-12">
-            <p-fileUpload #fu4 mode="basic" accept="image/*" (onBeforeUpload)="fu4.clear()" (onSelect)="onUpload($event, 4)"
-              [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
-            </p-fileUpload>
-          </div>
+              <p-image [src]="image4" alt="Imagem 4" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu4 mode="basic" accept="image/*" (onBeforeUpload)="fu4.clear()"
+                (onSelect)="onUpload($event, 4)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
           </p-fieldset>
         </div>
       </div>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="closeImageDialog()"></button>
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger"
+      (click)="closeImageDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveImagesPet()"
       [disabled]="!pet.photo1 && !pet.photo2 && !pet.photo3 && !pet.photo4 ? true : false"></button>
   </ng-template>

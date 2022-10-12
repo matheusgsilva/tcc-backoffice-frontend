@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
@@ -17,6 +18,7 @@ export class CompanyListComponent implements OnInit {
   companyDialog: boolean = false;
   passwordDialog: boolean = false;
   validationDialog: boolean = false;
+  companyImageDialog: boolean = false;
 
   filter: string = "";
 
@@ -30,7 +32,9 @@ export class CompanyListComponent implements OnInit {
 
   cnpjResponse: CnpjResponse = new CnpjResponse();
 
-  constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private companyService: CompanyService) { }
+  image1: any;
+
+  constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private companyService: CompanyService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.list();
@@ -163,6 +167,12 @@ export class CompanyListComponent implements OnInit {
     this.company = new Company();
   }
 
+  sendEmailAccess(guid: string) {
+    this.companyService.sendEmailAccess(guid).subscribe(response => {
+      this.getMessage((response as ResponseAPI).code);
+    }, () => this.getMessage(404));
+  }
+
   unauthorize(company: Company) {
     this.confirmationService.confirm({
       message: 'Você tem certeza que deseja remover a permissão da organização: ' + company.name + '?',
@@ -175,6 +185,49 @@ export class CompanyListComponent implements OnInit {
       }
     });
   }
+
+  openImageDialog(companyGuid: string) {
+    this.company = new Company();
+    this.image1 = undefined;
+    this.companyImageDialog = true;
+    this.companyService.detail(companyGuid).subscribe((response => {
+      this.company = ((response as ResponseAPI).data as Company);
+      if (this.company.photo1)
+        this.image1 = this.sanitizer.bypassSecurityTrustResourceUrl(this.company.photo1);
+    }));
+  }
+
+  closeImageDialog() {
+    this.companyImageDialog = false;
+  }
+
+  onUpload(event: any, image: number) {
+    const file = event.files[0];
+    if (file) {
+      const reader = new FileReader();
+      if (image == 1)
+        reader.onload = this.handleReaderLoaded1.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  handleReaderLoaded1(e: any) {
+    const image = `data:image/png;base64, ${btoa(e.target.result)}`
+    this.company.photo1 = image;
+    this.image1 = this.sanitizer.bypassSecurityTrustResourceUrl(image);
+  }
+
+  saveImagesCompany() {
+    this.companyService.update({
+      ...this.company
+    },
+      this.company.guid).subscribe(response => {
+        this.getMessage((response as ResponseAPI).code);
+      }, () => this.getMessage(404));
+    this.companyImageDialog = false;
+    this.company = new Company();
+  }
+
 
   getMessage(code: number) {
     if (code == 200) {

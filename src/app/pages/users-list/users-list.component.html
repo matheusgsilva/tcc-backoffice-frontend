@@ -65,8 +65,9 @@
             style="margin-left: 5px" (click)="editUser(user)" pTooltip="Editar Usuário" tooltipPosition="top"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" style="margin-left: 5px"
             (click)="deleteUser(user)" pTooltip="Excluir Usuário" tooltipPosition="top"></button>
-          <button pButton pRipple icon="pi pi-lock" class="p-button-rounded p-button-warning" style="margin-left: 5px"
-            (click)="editPassword(user)" pTooltip="Editar Senha do Usuário" tooltipPosition="top"></button>
+          <button pButton pRipple icon="pi pi-lock" class="p-button-rounded"
+            style="margin-left: 5px; background-color: orange; border-color: orange;" (click)="editPassword(user)"
+            pTooltip="Editar Senha do Usuário" tooltipPosition="top"></button>
         </td>
       </tr>
     </ng-template>

@@ -49,4 +49,8 @@ export class CompanyService {
   list() {
     return this.http.get(environment.url + API_ENDPOINTS.COMPANY.LIST);
   }
+
+  sendEmailAccess(guid: string) {
+    return this.http.get(environment.url + API_ENDPOINTS.COMPANY.EMAIL_ACCESS + guid);
+  }
 }

@@ -18,10 +18,11 @@ export const API_ENDPOINTS = {
     AUTHORIZE:"backend/api/company/authorize/guid/",
     UNAUTHORIZE:"backend/api/company/unauthorize/guid/",
     CEP_CHECK:"backend/api/company/query/cep/",
-    CNPJ_CHECK:"backend/api/company/query/cnpj/"
+    CNPJ_CHECK:"backend/api/company/query/cnpj/",
+    EMAIL_ACCESS:"backend/api/company/send/email/access/guid/"
   },
   PET: {
-    ADD: "backend/api/pet/add",
+    ADD: "backend/api/pet/add/",
     UPDATE: "backend/api/pet/update/guid/",
     DETAIL: "backend/api/pet/detail/guid/",
     DELETE: "backend/api/pet/delete/guid/",
