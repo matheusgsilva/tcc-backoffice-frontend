@@ -29,9 +29,6 @@ export const API_ENDPOINTS = {
     LIST: "backend/api/pet/list/companyguid/"
   },
   RATING:{
-    ADD: "backend/api/rating/add/companyguid/",
-    UPDATE: "backend/api/rating/update/guid/",
-    DETAIL: "backend/api/rating/detail/guid/",
     DELETE: "backend/api/rating/delete/guid/",
     LIST: "backend/api/rating/list/companyguid/"
   }
