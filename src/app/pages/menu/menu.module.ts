@@ -29,6 +29,9 @@ import { CompanyListComponent } from '../company-list/company-list.component';
 import { PetListComponent } from '../pet-list/pet-list.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ImageModule } from 'primeng/image';
+import { RatingListComponent } from '../rating-list/rating-list.component';
+import { RatingModule } from 'primeng/rating';
+
 
 @NgModule({
   imports: [
@@ -57,13 +60,15 @@ import { ImageModule } from 'primeng/image';
     TooltipModule,
     FileUploadModule,
     FieldsetModule,
-    ImageModule
+    ImageModule,
+    RatingModule
   ],
   declarations: [
     UsersListComponent,
     CompanyListComponent,
     DocumentFormatPipe,
-    PetListComponent
+    PetListComponent,
+    RatingListComponent
   ],
 })
 export class MenuModule { }

@@ -175,8 +175,8 @@
           </p-fieldset>
         </div>
         <div class="col-3">
-          <p-fieldset legend="Imagem 2" *ngIf="image2">
-            <div class="col-12">
+          <p-fieldset legend="Imagem 2">
+            <div class="col-12" *ngIf="image2">
               <p-image [src]="image2" alt="Imagem 2" height="150" [preview]="true"></p-image>
             </div>
             <div class="col-12">

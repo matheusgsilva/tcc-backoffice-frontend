@@ -22,10 +22,17 @@ export const API_ENDPOINTS = {
     EMAIL_ACCESS:"backend/api/company/send/email/access/guid/"
   },
   PET: {
-    ADD: "backend/api/pet/add/",
+    ADD: "backend/api/pet/add/companyguid/",
     UPDATE: "backend/api/pet/update/guid/",
     DETAIL: "backend/api/pet/detail/guid/",
     DELETE: "backend/api/pet/delete/guid/",
     LIST: "backend/api/pet/list/companyguid/"
   },
+  RATING:{
+    ADD: "backend/api/rating/add/companyguid/",
+    UPDATE: "backend/api/rating/update/guid/",
+    DETAIL: "backend/api/rating/detail/guid/",
+    DELETE: "backend/api/rating/delete/guid/",
+    LIST: "backend/api/rating/list/companyguid/"
+  }
 };

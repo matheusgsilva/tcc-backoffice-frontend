@@ -13,7 +13,7 @@ import { ErrInterceptor } from './shared/error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

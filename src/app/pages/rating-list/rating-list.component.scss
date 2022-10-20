@@ -1,0 +1,14 @@
+.title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: 10px;
+}
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  vertical-align: middle;
+}

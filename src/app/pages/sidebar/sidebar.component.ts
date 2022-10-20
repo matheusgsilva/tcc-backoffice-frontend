@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit {
           { label: 'Usuários', icon: PrimeIcons.USERS, routerLink: ['/users-list'] },
           { label: 'Organizações', icon: PrimeIcons.BRIEFCASE, routerLink: ['/companies-list'] },
           { label: 'Pets', icon: PrimeIcons.GITHUB, routerLink: ['/pets-list'] },
+          { label: 'Avaliações', icon: PrimeIcons.STAR, routerLink: ['/rating-list'] },
         ]
       },
       {
