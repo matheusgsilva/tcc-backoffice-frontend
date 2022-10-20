@@ -27,16 +27,24 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginService.login(this.form.getRawValue())
       .subscribe((response) => {
-        localStorage["token"] = response.data.token;
-        localStorage["email"] = response.data.email;
-        localStorage["userGuid"] = response.data.guid;
-        this.router.navigate([""]);
+        if (response.data.permission == 1) {
+          localStorage["token"] = response.data.token;
+          localStorage["email"] = response.data.email;
+          localStorage["userGuid"] = response.data.guid;
+          this.router.navigate([""]);
+        } else {
+          this.unauthorized();
+        }
       },
         error => {
           if (error.status == 401) {
-            this.showDialog("Credenciais Inválidas!", "Usuários e/ou senhas inválidos! Verifique os dados inseridos.")
+            this.unauthorized();
           } else this.showDialog("Ocorreu um erro!", "Um erro ocorreu ao realizar a transação. Por favor, tente novamente.");
         });
+  }
+
+  unauthorized() {
+    this.showDialog("Credenciais Inválidas!", "Usuários e/ou senhas inválidos! Verifique os dados inseridos.");
   }
 
   showDialog(title: string, msg: string) {
