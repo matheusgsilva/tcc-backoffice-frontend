@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="box">
+    <div class="p-grid" style="padding-top: 20px;">
+      <div class="p-col-12" style="text-align: center;">
+        <img src="../../../assets/logo-title.jpg" width="150px" alt="">
+        <h4 class="title">4PET - Avaliação da ONG</h4>
+      </div>
+      <div class="p-fluid">
+        <div class="p-field first">
+          <label for="float-input">Avalie o Atendimento da ONG: {{companyname}}</label>
+        </div>
+        <div class="p-field second">
+          <p-rating [(ngModel)]="classification" [readonly]="false" [cancel]="false"></p-rating>
+        </div>
+        <div class="p-field thrid">
+          <p-button label="Salvar Avaliação" icon="pi pi-save" (onClick)="openDialog()">
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog [header]="messageCredentialsDialogTitle" [(visible)]="displayCredentialsDialog" [modal]="true"
+  [style]="{ width: '400px' }">
+  <form [formGroup]="form">
+    <div class="grid">
+      <div class="col-12">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText formControlName="email" />
+          <label for="float-input">E-mail</label>
+        </span>
+      </div>
+      <div class="col-12" style="margin-top: 10px;">
+        <span class="p-float-label">
+          <input id="float-input" type="password" pInputText formControlName="password" />
+          <label for="float-input">Senha</label>
+        </span>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger"
+      (click)="displayCredentialsDialog = false"></button>
+    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" [disabled]="form.invalid"
+      (click)="save()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-toast></p-toast>

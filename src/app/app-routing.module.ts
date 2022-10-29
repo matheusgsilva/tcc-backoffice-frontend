@@ -10,6 +10,11 @@ const routes: Routes = [
       import('./pages/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'rating',
+    loadChildren: () =>
+      import('./pages/rating/rating.module').then((m) => m.RatingUserModule),
+  },
+  {
     path: '',
     component: MenuComponent,
     children: [

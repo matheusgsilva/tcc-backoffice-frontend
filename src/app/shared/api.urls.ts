@@ -13,6 +13,7 @@ export const API_ENDPOINTS = {
     UPDATE: "backend/api/company/update/guid/",
     UPDATE_PASS: "backend/api/company/updatepass",
     DETAIL: "backend/api/company/detail/guid/",
+    DETAIL_NAME: "backend/company/detail/name/guid/",
     DELETE: "backend/api/company/delete/guid/",
     LIST: "backend/api/company/list",
     AUTHORIZE:"backend/api/company/authorize/guid/",
@@ -30,6 +31,7 @@ export const API_ENDPOINTS = {
   },
   RATING:{
     DELETE: "backend/api/rating/delete/guid/",
-    LIST: "backend/api/rating/list/companyguid/"
+    LIST: "backend/api/rating/list/companyguid/",
+    SAVE: "backend/rating/save/companyguid/"
   }
 };

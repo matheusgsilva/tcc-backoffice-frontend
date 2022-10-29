@@ -26,6 +26,10 @@ export class CompanyService {
     return this.http.get(environment.url + API_ENDPOINTS.COMPANY.DETAIL + guid);
   }
 
+  detailName(guid: string) {
+    return this.http.get(environment.url + API_ENDPOINTS.COMPANY.DETAIL_NAME + guid);
+  }
+
   authorize(guid: string) {
     return this.http.get(environment.url + API_ENDPOINTS.COMPANY.AUTHORIZE + guid);
   }
