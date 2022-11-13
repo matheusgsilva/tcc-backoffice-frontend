@@ -16,7 +16,6 @@ import { CompanyService } from './company.service';
 export class CompanyListComponent implements OnInit {
 
   companyDialog: boolean = false;
-  passwordDialog: boolean = false;
   validationDialog: boolean = false;
   companyImageDialog: boolean = false;
 
@@ -70,11 +69,6 @@ export class CompanyListComponent implements OnInit {
     this.companyDialog = true;
   }
 
-  editPassword(company: Company) {
-    this.company = company;
-    this.passwordDialog = true;
-  }
-
   deleteCompany(company: Company) {
     this.confirmationService.confirm({
       message: 'Você tem certeza que deseja excluir a organização: ' + company.name + '?',
@@ -90,7 +84,6 @@ export class CompanyListComponent implements OnInit {
 
   hideDialog() {
     this.companyDialog = false;
-    this.passwordDialog = false;
     this.validationDialog = false;
   }
 
@@ -113,11 +106,10 @@ export class CompanyListComponent implements OnInit {
     this.company = new Company();
   }
 
-  savePassword() {
-    this.companyService.updatePassword({ guid: this.company.guid, password: this.company.password }).subscribe(response => {
+  sendEmailPassword(company: Company) {
+    this.companyService.changePassword({ email: company.email }).subscribe(response => {
       this.getMessage((response as ResponseAPI).code);
     }, () => this.getMessage(404));
-    this.passwordDialog = false;
     this.company = new Company();
   }
 

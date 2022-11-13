@@ -18,8 +18,8 @@ export class CompanyService {
     return this.http.put(environment.url + API_ENDPOINTS.COMPANY.UPDATE + guid, body);
   }
 
-  updatePassword(body: any) {
-    return this.http.post(environment.url + API_ENDPOINTS.COMPANY.UPDATE_PASS, body);
+  changePassword(body: any) {
+    return this.http.post(environment.url + API_ENDPOINTS.COMPANY.CHANGE_PASS, body);
   }
 
   detail(guid: string) {

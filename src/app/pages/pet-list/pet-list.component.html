@@ -48,11 +48,11 @@
         <th style="width: 2%">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th pSortableColumn="name" style="width: 20%">Nome<p-sortIcon field="name"></p-sortIcon>
+        <th pSortableColumn="name" style="width: 20%">Animal<p-sortIcon field="name"></p-sortIcon>
         </th>
         <th pSortableColumn="breed" style="width: 20%">Raça<p-sortIcon field="breed"></p-sortIcon>
         </th>
-        <th pSortableColumn="size" style="width: 20%">Tamanho<p-sortIcon field="size"></p-sortIcon>
+        <th pSortableColumn="size" style="width: 20%">Porte<p-sortIcon field="size"></p-sortIcon>
         </th>
         <th pSortableColumn="age" style="width: 20%">Idade<p-sortIcon field="age"></p-sortIcon>
         </th>
@@ -64,7 +64,7 @@
         <td>
           <p-tableCheckbox [value]="pet"></p-tableCheckbox>
         </td>
-        <td>{{pet.name}}</td>
+        <td>{{pet.typePet}}</td>
         <td>{{pet.breed}}</td>
         <td>{{pet.size}}</td>
         <td>{{pet.age}}</td>
@@ -94,12 +94,21 @@
       <div class="grid">
         <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.name" maxlength="100" required autofocus />
-            <label for="name">Nome*</label>
+            <input type="text" pInputText [(ngModel)]="pet.typePet" maxlength="50" required />
+            <label for="typePet">Animal*</label>
           </span>
-          <small class="p-error" *ngIf="!pet.name">Este campo é obrigatório.</small>
+          <small class="p-error" *ngIf="!pet.typePet">Este campo é obrigatório.</small>
         </div>
         <div class="col-6">
+          <span class="p-float-label">
+            <input type="text" pInputText [(ngModel)]="pet.gender" maxlength="50" required />
+            <label for="gender">Sexo*</label>
+          </span>
+          <small class="p-error" *ngIf="!pet.gender">Este campo é obrigatório.</small>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-12">
           <span class="p-float-label">
             <input type="text" pInputText [(ngModel)]="pet.breed" maxlength="50" required autofocus />
             <label for="breed">Raça*</label>
@@ -111,7 +120,7 @@
         <div class="col-6">
           <span class="p-float-label">
             <input type="text" pInputText [(ngModel)]="pet.size" maxlength="30" required />
-            <label for="size">Tamanho*</label>
+            <label for="size">Porte*</label>
           </span>
           <small class="p-error" *ngIf="!pet.size">Este campo é obrigatório.</small>
         </div>
@@ -153,7 +162,7 @@
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="savePet()"
-      [disabled]="!pet.name || !pet.breed || !pet.size || !pet.age ? true : false"></button>
+      [disabled]="!pet.typePet || !pet.gender || !pet.breed || !pet.size || !pet.age ? true : false"></button>
   </ng-template>
 </p-dialog>
 

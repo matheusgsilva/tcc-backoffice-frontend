@@ -65,9 +65,9 @@
             style="margin-left: 5px" (click)="editUser(user)" pTooltip="Editar Usuário" tooltipPosition="top"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" style="margin-left: 5px"
             (click)="deleteUser(user)" pTooltip="Excluir Usuário" tooltipPosition="top"></button>
-          <button pButton pRipple icon="pi pi-lock" class="p-button-rounded"
-            style="margin-left: 5px; background-color: orange; border-color: orange;" (click)="editPassword(user)"
-            pTooltip="Editar Senha do Usuário" tooltipPosition="top"></button>
+          <button pButton pRipple icon="pi pi-envelope" class="p-button-rounded"
+            style="margin-left: 5px; background-color: orange; border-color: orange;" (click)="sendEmailPassword(user)"
+            pTooltip="Enviar E-mail de Recuperação de Senha do Usuário" tooltipPosition="top"></button>
         </td>
       </tr>
     </ng-template>
@@ -136,28 +136,6 @@
       [disabled]="!user.name || !user.email || !user.document || !user.phone || !user.password ? true : false"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveUser()"
       *ngIf="user.guid" [disabled]="!user.name || !user.email || !user.document || !user.phone ? true : false"></button>
-  </ng-template>
-</p-dialog>
-
-<p-dialog [(visible)]="passwordDialog" [style]="{width: '30vw'}" header="Senha do Usuário" [modal]="true"
-  (onHide)="hideDialog()" styleClass="p-fluid">
-  <ng-template pTemplate="content">
-    <div class="content">
-      <div class="grid">
-        <div class="col-12">
-          <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="user.password" maxlength="100" required />
-            <label for="password">Senha*</label>
-          </span>
-          <small class="p-error" *ngIf="!user.password">Este campo é obrigatório.</small>
-        </div>
-      </div>
-    </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success"
-      [disabled]="!user.password ? true : false" (click)="savePassword()"></button>
   </ng-template>
 </p-dialog>
 

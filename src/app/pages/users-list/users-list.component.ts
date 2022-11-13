@@ -15,7 +15,6 @@ import { UsersService } from './users.service';
 export class UsersListComponent implements OnInit {
 
   userDialog: boolean = false;
-  passwordDialog: boolean = false;
 
   filter: string = "";
 
@@ -61,11 +60,6 @@ export class UsersListComponent implements OnInit {
     this.userDialog = true;
   }
 
-  editPassword(user: User) {
-    this.user = { ...user, document: user.document!.replace("-", "").replace(/\./g, "") };
-    this.passwordDialog = true;
-  }
-
   deleteUser(user: User) {
     this.confirmationService.confirm({
       message: 'Você tem certeza que deseja excluir o usuário: ' + user.name + '?',
@@ -81,7 +75,6 @@ export class UsersListComponent implements OnInit {
 
   hideDialog() {
     this.userDialog = false;
-    this.passwordDialog = false;
   }
 
   saveUser() {
@@ -97,12 +90,10 @@ export class UsersListComponent implements OnInit {
     this.user = new User();
   }
 
-  savePassword() {
-      this.userService.updatePassword({ guid: this.user.guid, password: this.user.password }).subscribe(response => {
+  sendEmailPassword(user: User) {
+      this.userService.changePassword({ email: user.email }).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
-    this.passwordDialog = false;
-    this.user = new User();
   }
 
   getMessage(code: number) {

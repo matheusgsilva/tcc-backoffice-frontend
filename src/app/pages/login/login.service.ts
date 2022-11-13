@@ -13,7 +13,11 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(body: any) {
-    return this.http.post<ResponseAPI>(`${environment.url}${API_ENDPOINTS.LOGIN}`, body);
+    return this.http.post<ResponseAPI>(`${environment.url}${API_ENDPOINTS.LOGIN.LOGIN}`, body);
+  }
+
+  updatePass(body: any) {
+    return this.http.post<ResponseAPI>(`${environment.url}${API_ENDPOINTS.LOGIN.UPDATE_PASS}`, body);
   }
 
   logout() {

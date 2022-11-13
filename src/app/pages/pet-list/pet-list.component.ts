@@ -81,7 +81,7 @@ export class PetListComponent implements OnInit {
 
   deletePet(pet: Pet) {
     this.confirmationService.confirm({
-      message: 'Você tem certeza que deseja excluir o pet: ' + pet.name + '?',
+      message: 'Você tem certeza que deseja excluir o pet?',
       header: 'Atenção',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
