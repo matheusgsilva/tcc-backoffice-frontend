@@ -1,9 +1,12 @@
 export const API_ENDPOINTS = {
-  LOGIN: 'backend/logon',
+  LOGIN: {
+    LOGIN: 'backend/logon',
+    UPDATE_PASS: "backend/update/password"
+  },
   USER: {
     ADD: "backend/user/add",
     UPDATE: "backend/api/user/update/guid/",
-    UPDATE_PASS: "backend/api/user/updatepass",
+    CHANGE_PASS: "backend/update/password",
     DETAIL: "backend/api/user/detail/guid/",
     DELETE: "backend/api/user/delete/guid/",
     LIST: "backend/api/user/list"
@@ -11,7 +14,7 @@ export const API_ENDPOINTS = {
   COMPANY:{
     ADD: "backend/company/add",
     UPDATE: "backend/api/company/update/guid/",
-    UPDATE_PASS: "backend/api/company/updatepass",
+    CHANGE_PASS: "backend/change/password",
     DETAIL: "backend/api/company/detail/guid/",
     DETAIL_NAME: "backend/company/detail/name/guid/",
     DELETE: "backend/api/company/delete/guid/",
