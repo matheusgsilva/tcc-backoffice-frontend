@@ -166,19 +166,55 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [(visible)]="petImageDialog" [style]="{width: '30vw'}" header="Upload de Imagens" [modal]="true"
+<p-dialog [(visible)]="petImageDialog" [style]="{width: '60vw'}" header="Upload de Imagens" [modal]="true"
   (onHide)="hideDialog()" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <div class="content">
       <div class="grid">
-        <div class="col-12">
+        <div class="col-3">
           <p-fieldset legend="Imagem 1">
-            <div class="col-12" *ngIf="image1" style="text-align: center;">
+            <div class="col-12" *ngIf="image1">
               <p-image [src]="image1" alt="Imagem 1" height="150" [preview]="true"></p-image>
             </div>
-            <div class="col-12" style="text-align: center;">
+            <div class="col-12">
               <p-fileUpload #fu1 mode="basic" accept="image/*" (onBeforeUpload)="fu1.clear()"
                 (onSelect)="onUpload($event, 1)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="col-3">
+          <p-fieldset legend="Imagem 2">
+            <div class="col-12" *ngIf="image2">
+              <p-image [src]="image2" alt="Imagem 2" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu2 mode="basic" accept="image/*" (onBeforeUpload)="fu2.clear()"
+                (onSelect)="onUpload($event, 2)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="col-3">
+          <p-fieldset legend="Imagem 3">
+            <div class="col-12" *ngIf="image3">
+              <p-image [src]="image3" alt="Imagem 3" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu3 mode="basic" accept="image/*" (onBeforeUpload)="fu3.clear()"
+                (onSelect)="onUpload($event, 3)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
+              </p-fileUpload>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="col-3">
+          <p-fieldset legend="Imagem 4">
+            <div class="col-12" *ngIf="image4">
+              <p-image [src]="image4" alt="Imagem 4" height="150" [preview]="true"></p-image>
+            </div>
+            <div class="col-12">
+              <p-fileUpload #fu4 mode="basic" accept="image/*" (onBeforeUpload)="fu4.clear()"
+                (onSelect)="onUpload($event, 4)" [auto]="true" [fileLimit]="1" chooseLabel="Selecionar">
               </p-fileUpload>
             </div>
           </p-fieldset>
