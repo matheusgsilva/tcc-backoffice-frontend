@@ -6,7 +6,7 @@ export const API_ENDPOINTS = {
   USER: {
     ADD: "backend/user/add",
     UPDATE: "backend/api/user/update/guid/",
-    CHANGE_PASS: "backend/update/password",
+    CHANGE_PASS: "backend/change/password",
     DETAIL: "backend/api/user/detail/guid/",
     DELETE: "backend/api/user/delete/guid/",
     LIST: "backend/api/user/list"
