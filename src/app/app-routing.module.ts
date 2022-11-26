@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'rating',
     loadChildren: () =>
-      import('./pages/rating/rating.module').then((m) => m.RatingUserModule),
+      import('./pages/rating/rating-user.module').then((m) => m.RatingUserModule),
   },
   {
     path: '',
