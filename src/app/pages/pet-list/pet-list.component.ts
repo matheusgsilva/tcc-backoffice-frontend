@@ -33,9 +33,6 @@ export class PetListComponent implements OnInit {
   selectedCompany: string = "";
 
   image1: any;
-  image2: any;
-  image3: any;
-  image4: any;
 
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private petService: PetService, private companyService: CompanyService, private sanitizer: DomSanitizer) { }
 
@@ -112,20 +109,11 @@ export class PetListComponent implements OnInit {
   openImageDialog(petGuid: string) {
     this.pet = new Pet();
     this.image1 = undefined;
-    this.image2 = undefined;
-    this.image3 = undefined;
-    this.image4 = undefined;
     this.petImageDialog = true;
     this.petService.detail(petGuid).subscribe((response => {
       this.pet = ((response as ResponseAPI).data as Pet);
       if (this.pet.photo1)
         this.image1 = this.sanitizer.bypassSecurityTrustResourceUrl(this.pet.photo1);
-      if (this.pet.photo2)
-        this.image2 = this.sanitizer.bypassSecurityTrustResourceUrl(this.pet.photo2);
-      if (this.pet.photo3)
-        this.image3 = this.sanitizer.bypassSecurityTrustResourceUrl(this.pet.photo3);
-      if (this.pet.photo4)
-        this.image4 = this.sanitizer.bypassSecurityTrustResourceUrl(this.pet.photo4);
     }));
   }
 
@@ -139,12 +127,6 @@ export class PetListComponent implements OnInit {
       const reader = new FileReader();
       if (image == 1)
         reader.onload = this.handleReaderLoaded1.bind(this);
-      if (image == 2)
-        reader.onload = this.handleReaderLoaded2.bind(this);
-      if (image == 3)
-        reader.onload = this.handleReaderLoaded3.bind(this);
-      if (image == 4)
-        reader.onload = this.handleReaderLoaded4.bind(this);
       reader.readAsBinaryString(file);
     }
   }
@@ -153,24 +135,6 @@ export class PetListComponent implements OnInit {
     const image = `data:image/png;base64, ${btoa(e.target.result)}`
     this.pet.photo1 = image;
     this.image1 = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-  }
-
-  handleReaderLoaded2(e: any) {
-    const image = `data:image/png;base64, ${btoa(e.target.result)}`
-    this.pet.photo2 = image;
-    this.image2 = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-  }
-
-  handleReaderLoaded3(e: any) {
-    const image = `data:image/png;base64, ${btoa(e.target.result)}`
-    this.pet.photo3 = image;
-    this.image3 = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-  }
-
-  handleReaderLoaded4(e: any) {
-    const image = `data:image/png;base64, ${btoa(e.target.result)}`
-    this.pet.photo4 = image;
-    this.image4 = this.sanitizer.bypassSecurityTrustResourceUrl(image);
   }
 
   saveImagesPet() {
