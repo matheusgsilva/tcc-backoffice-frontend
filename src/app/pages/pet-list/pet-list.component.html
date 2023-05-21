@@ -152,9 +152,10 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <textarea type="text" pInputText [(ngModel)]="pet.medication" [rows]="5" [cols]="30"></textarea>
-            <label for="medication">Medicação</label>
+            <input type="text" pInputText [(ngModel)]="pet.color" maxlength="200" required />
+            <label for="age">Cor*</label>
           </span>
+          <small class="p-error" *ngIf="!pet.color">Este campo é obrigatório.</small>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ export class Pet{
   age!: string;
   breed!: string;
   vaccines!: string;
-  medication!: string;
+  color!: string;
   photo1!: string;
   photo2!: string;
   photo3!: string;
