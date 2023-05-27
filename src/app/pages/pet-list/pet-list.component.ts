@@ -95,7 +95,7 @@ export class PetListComponent implements OnInit {
 
   savePet() {
     if (this.pets.filter(s => s.guid == this.pet?.guid).length == 0)
-      this.petService.add({ ...this.pet }, this.selectedCompany).subscribe(response => {
+      this.petService.add({ ...this.pet, breed: this.pet?.breed?.trim() == "" ? null : this.pet.breed }, this.selectedCompany).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     else
