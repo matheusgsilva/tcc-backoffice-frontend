@@ -110,10 +110,9 @@
       <div class="grid">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.breed" maxlength="50" required autofocus />
+            <input type="text" pInputText [(ngModel)]="pet.breed" maxlength="50" autofocus />
             <label for="breed">Raça*</label>
           </span>
-          <small class="p-error" *ngIf="!pet.breed">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid">
