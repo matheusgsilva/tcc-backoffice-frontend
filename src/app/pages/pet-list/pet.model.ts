@@ -4,6 +4,7 @@ export class Pet{
   description!: string;
   size!: string;
   age!: string;
+  birthDate!: string;
   breed!: string;
   vaccines!: string;
   color!: string;

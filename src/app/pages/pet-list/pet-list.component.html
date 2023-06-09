@@ -125,10 +125,10 @@
         </div>
         <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.age" maxlength="30" required />
-            <label for="age">Idade*</label>
+            <input type="text" pInputText [(ngModel)]="pet.birthDate" maxlength="30" required />
+            <label for="birthDate">Data de Nascimento*</label>
           </span>
-          <small class="p-error" *ngIf="!pet.age">Este campo é obrigatório.</small>
+          <small class="p-error" *ngIf="!pet.birthDate">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid">
