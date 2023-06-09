@@ -34,6 +34,32 @@ export class PetListComponent implements OnInit {
 
   image1: any;
 
+  gender: any[] = [
+    { name: 'Macho', code: 'M' },
+    { name: 'Fêmea', code: 'F' }
+  ];
+
+  breed: any[] = [
+    { name: "Vira Lata", code: "Vira Lata" },
+    { name: "Akita", code: "Akita" },
+    { name: "Rottweiler", code: "Rottweiler" },
+    { name: "Beagle", code: "Beagle" },
+    { name: "Shiba", code: "Shiba" },
+    { name: "Poddle", code: "Poddle" },
+    { name: "Pit bull", code: "Pit bull" },
+    { name: "Pug", code: "Pug" },
+    { name: "Chihuahua", code: "Chihuahua" },
+    { name: "Shar-pei", code: "Shar-pei" },
+    { name: "Pinscher", code: "Pinscher" }
+  ];
+
+  typePet: any[] = [
+    { code: "dog", name: "Cachorro" },
+    { code: "cat", name: "Gato" },
+    { code: "birdie", name: "Passarinho" },
+    { code: "rabbit", name: "Coelho" }
+  ];
+
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private petService: PetService, private companyService: CompanyService, private sanitizer: DomSanitizer) { }
 
   async ngOnInit() {
@@ -72,7 +98,11 @@ export class PetListComponent implements OnInit {
   }
 
   editPet(pet: Pet) {
-    this.pet = pet;
+    this.pet = { ...pet };
+    this.pet.gender = this.gender.filter(g => g.code == pet.gender)[0];
+    let breed = this.breed.filter(b => b.code == pet.breed);
+    this.pet.breed = breed.length > 0 ? breed[0] : this.pet.breed;
+    this.pet.typePet = this.typePet.filter(t => t.code == pet.typePet)[0];
     this.petDialog = true;
   }
 
@@ -95,11 +125,11 @@ export class PetListComponent implements OnInit {
 
   savePet() {
     if (this.pets.filter(s => s.guid == this.pet?.guid).length == 0)
-      this.petService.add({ ...this.pet, breed: this.pet?.breed?.trim() == "" ? null : this.pet.breed }, this.selectedCompany).subscribe(response => {
+      this.petService.add({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.typePet.code == "dog" ? this.pet.breed.code : "", typePet: this.pet.typePet.code }, this.selectedCompany).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     else
-      this.petService.update({ ...this.pet }, this.pet.guid).subscribe(response => {
+      this.petService.update({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.typePet.code == "dog" ? this.pet.breed.code : "", typePet: this.pet.typePet.code }, this.pet.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     this.petDialog = false;
@@ -154,5 +184,9 @@ export class PetListComponent implements OnInit {
       this.list();
     } else
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Operação não realizada!', life: 3000 });
+  }
+
+  findNameTypePet(typePet: string){
+    return this.typePet.filter(t => t.code == typePet)[0]?.name;
   }
 }

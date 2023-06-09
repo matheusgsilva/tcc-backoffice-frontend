@@ -64,8 +64,8 @@
         <td>
           <p-tableCheckbox [value]="pet"></p-tableCheckbox>
         </td>
-        <td>{{pet.typePet}}</td>
-        <td>{{pet.breed}}</td>
+        <td>{{findNameTypePet(pet.typePet)}}</td>
+        <td>{{pet.breed ? pet.breed : "N.A."}}</td>
         <td>{{pet.size}}</td>
         <td>{{pet.age}}</td>
         <td>
@@ -94,23 +94,23 @@
       <div class="grid">
         <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.typePet" maxlength="50" required />
+            <p-dropdown [options]="typePet" [(ngModel)]="pet.typePet" optionLabel="name" appendTo="body" [showClear]="true"></p-dropdown>
             <label for="typePet">Animal*</label>
           </span>
           <small class="p-error" *ngIf="!pet.typePet">Este campo é obrigatório.</small>
         </div>
         <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.gender" maxlength="50" required />
+            <p-dropdown [options]="gender" [(ngModel)]="pet.gender" optionLabel="name" appendTo="body" [showClear]="true"></p-dropdown>
             <label for="gender">Sexo*</label>
           </span>
           <small class="p-error" *ngIf="!pet.gender">Este campo é obrigatório.</small>
         </div>
       </div>
-      <div class="grid">
+      <div class="grid" *ngIf="pet.typePet.code == 'dog'">
         <div class="col-12">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.breed" maxlength="50" autofocus />
+            <p-dropdown [options]="breed" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false" [editable]="true"></p-dropdown>
             <label for="breed">Raça*</label>
           </span>
         </div>
@@ -152,9 +152,8 @@
         <div class="col-12">
           <span class="p-float-label">
             <input type="text" pInputText [(ngModel)]="pet.color" maxlength="200" required />
-            <label for="age">Cor*</label>
+            <label for="color">Cor</label>
           </span>
-          <small class="p-error" *ngIf="!pet.color">Este campo é obrigatório.</small>
         </div>
       </div>
     </div>
@@ -162,7 +161,7 @@
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="savePet()"
-      [disabled]="!pet.typePet || !pet.gender || !pet.breed || !pet.size || !pet.age ? true : false"></button>
+      [disabled]="!pet.typePet || !pet.gender || pet.typePet.code == 'dog' ? !pet.breed : false|| !pet.size || !pet.age ? true : false"></button>
   </ng-template>
 </p-dialog>
 

@@ -65,7 +65,7 @@ export class CompanyListComponent implements OnInit {
   }
 
   editCompany(company: Company) {
-    this.company = company;
+    this.company = { ...company };
     this.companyDialog = true;
   }
 

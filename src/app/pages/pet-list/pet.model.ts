@@ -1,11 +1,11 @@
 export class Pet{
-  gender!: string;
-  typePet!: string;
+  gender!: any;
+  typePet!: any;
   description!: string;
   size!: string;
   age!: string;
   birthDate!: string;
-  breed!: string;
+  breed!: any;
   vaccines!: string;
   color!: string;
   photo1!: string;
