@@ -40,9 +40,10 @@ export class PetListComponent implements OnInit {
   ];
 
   breed: any[] = [
-    { name: "Vira Lata", code: "Vira Lata" },
+    { name: "SRD", code: "SRD" },
     { name: "Akita", code: "Akita" },
     { name: "Rottweiler", code: "Rottweiler" },
+    { name: "Dashing Hound", code: "Dashing Hound" },
     { name: "Beagle", code: "Beagle" },
     { name: "Shiba", code: "Shiba" },
     { name: "Poddle", code: "Poddle" },
