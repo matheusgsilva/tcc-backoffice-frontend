@@ -9,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private loginService: LoginService) { }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        if (!request.url.includes(":7776")) {
+        if (!request.url.includes("rating/save")) {
             const token = this.loginService.getCredentials();
             if (!!token) {
                 request = request.clone({

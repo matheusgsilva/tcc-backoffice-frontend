@@ -2,7 +2,7 @@ export class Pet{
   gender!: any;
   typePet!: any;
   description!: string;
-  size!: string;
+  size!: any;
   age!: string;
   birthDate!: string;
   breed!: any;

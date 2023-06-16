@@ -66,7 +66,7 @@
         </td>
         <td>{{findNameTypePet(pet.typePet)}}</td>
         <td>{{pet.breed ? pet.breed : "N.A."}}</td>
-        <td>{{pet.size}}</td>
+        <td>{{findNameSize(pet.size)}}</td>
         <td>{{pet.age}}</td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
@@ -107,7 +107,7 @@
           <small class="p-error" *ngIf="!pet.gender">Este campo é obrigatório.</small>
         </div>
       </div>
-      <div class="grid" *ngIf="pet.typePet.code == 'dog'">
+      <div class="grid" *ngIf="pet.typePet?.code == 'dog'">
         <div class="col-12">
           <span class="p-float-label">
             <p-dropdown [options]="breed" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false" [editable]="true"></p-dropdown>
@@ -118,7 +118,7 @@
       <div class="grid">
         <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="pet.size" maxlength="30" required />
+            <p-dropdown [options]="size" [(ngModel)]="pet.size" optionLabel="name" appendTo="body" [showClear]="true"></p-dropdown>
             <label for="size">Porte*</label>
           </span>
           <small class="p-error" *ngIf="!pet.size">Este campo é obrigatório.</small>
