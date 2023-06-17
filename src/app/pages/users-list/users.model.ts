@@ -5,4 +5,5 @@ export class User {
   document: string = "";
   phone: string = "";
   password: string = "";
+  confirmPassword: string = "";
 }

@@ -15,4 +15,5 @@ export class Pet{
   company!: string;
   companyGuid!: string;
   guid!: string;
+  identification!: string;
 }

@@ -23,6 +23,10 @@
         <div class="p-field thrid">
           <p-button label="Entrar" icon="pi pi-sign-in" [disabled]="form.invalid" (onClick)="login()"></p-button>
         </div>
+        <div class="p-field thrid">
+          <button pButton pRipple type="button" label="Esqueci minha Senha" class="p-button-outlined p-button-info"
+            (click)="showPasswordDialog()"></button>
+        </div>
       </div>
     </div>
   </div>
@@ -32,5 +36,24 @@
   <p>{{ messageDialog }}</p>
   <p-footer>
     <button type="button" pButton icon="pi pi-check" (click)="displayDialog = false" label="OK"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [header]="passwordDialogTitle" [(visible)]="passwordDialog" [modal]="true" [style]="{ width: '30vw' }">
+  <form [formGroup]="formPassword">
+    <div class="grid">
+      <div class="col-12" style="margin-top: 20px;">
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText formControlName="email" style="width: 100%;" />
+          <label for="float-input">Digite seu E-mail de Acesso.</label>
+        </span>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" class="p-button-danger" (click)="passwordDialog = false"
+      label="Cancelar"></button>
+    <button type="button" pButton icon="pi pi-check" class="p-button-success" (click)="updatePassword()"
+      label="OK" [disabled]="formPassword.invalid"></button>
   </p-footer>
 </p-dialog>

@@ -31,13 +31,16 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { ImageModule } from 'primeng/image';
 import { RatingListComponent } from '../rating-list/rating-list.component';
 import { RatingModule } from 'primeng/rating';
-
+import {PasswordModule} from 'primeng/password';
+import {DividerModule} from 'primeng/divider';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
+    DividerModule,
+    PasswordModule,
     TableModule,
     ReactiveFormsModule,
     ConfirmDialogModule,

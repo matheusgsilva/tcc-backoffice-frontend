@@ -11,9 +11,11 @@
           <button pButton pRipple label="Excluir" icon="pi pi-trash" class="p-button-danger"
             (click)="deleteSelectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
         </div>
-        <div class="col-fixed">
-          <button pButton pRipple label="Atualizar" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
-        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <div class="col-fixed">
+        <button pButton pRipple label="Atualizar Tabela" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
       </div>
     </ng-template>
   </p-toolbar>
@@ -119,12 +121,43 @@
         </div>
       </div>
       <div class="grid" *ngIf="!user.guid">
-        <div class="col-12">
+        <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="user.password" maxlength="100" required />
+            <p-password [(ngModel)]="user.password" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira uma senha">
+            <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="p-mt-2">Sugestões</p>
+                <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                  <li>Pelo menos uma letra minúscula.</li>
+                  <li>Pelo menos uma letra maiúscula.</li>
+                  <li>Pelo menos um número.</li>
+                  <li>Mínimo de 8 caracteres.</li>
+                </ul>
+            </ng-template>
+            </p-password>
             <label for="password">Senha*</label>
           </span>
           <small class="p-error" *ngIf="!user.password">Este campo é obrigatório.</small>
+        </div>
+        <div class="col-6">
+          <span class="p-float-label">
+            <p-password [(ngModel)]="user.confirmPassword" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira a senha novamente.">
+              <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="p-mt-2">Sugestões</p>
+                <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                  <li>Pelo menos uma letra minúscula.</li>
+                  <li>Pelo menos uma letra maiúscula.</li>
+                  <li>Pelo menos um número.</li>
+                  <li>Mínimo de 8 caracteres.</li>
+                </ul>
+            </ng-template>
+            </p-password>
+            <label for="password">Confirme a Senha*</label>
+          </span>
+          <small class="p-error" *ngIf="!user.confirmPassword">Este campo é obrigatório.</small>
+          <br>
+          <small class="p-error" *ngIf="user.password != user.confirmPassword">As senhas não conferem.</small>
         </div>
       </div>
     </div>
@@ -133,7 +166,7 @@
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveUser()"
       *ngIf="!user.guid"
-      [disabled]="!user.name || !user.email || !user.document || !user.phone || !user.password ? true : false"></button>
+      [disabled]="!user.name || !user.email || !user.document || !user.phone || !user.password || user.password != user.confirmPassword ? true : false"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveUser()"
       *ngIf="user.guid" [disabled]="!user.name || !user.email || !user.document || !user.phone ? true : false"></button>
   </ng-template>

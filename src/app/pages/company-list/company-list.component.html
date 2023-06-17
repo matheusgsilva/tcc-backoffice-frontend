@@ -11,9 +11,11 @@
           <button pButton pRipple label="Excluir" icon="pi pi-trash" class="p-button-danger"
             (click)="deleteSelectedCompanies()" [disabled]="!selectedCompanies || !selectedCompanies.length"></button>
         </div>
-        <div class="col-fixed">
-          <button pButton pRipple label="Atualizar" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
-        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <div class="col-fixed">
+        <button pButton pRipple label="Atualizar Tabela" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
       </div>
     </ng-template>
   </p-toolbar>
@@ -79,7 +81,7 @@
             pTooltip="Editar Organização" tooltipPosition="top" (click)="editCompany(company)"></button>
           <button pButton pRipple icon="pi pi-images" class="p-button-rounded p-button-warning" style="margin-left: 5px"
             (click)="openImageDialog(company.guid)" pTooltip="Editar Imagens da Organização"
-            tooltipPosition="top"></button>
+            tooltipPosition="top" *ngIf="false"></button>
           <button pButton pRipple icon="pi pi-envelope" class="p-button-rounded"
             style="margin-left: 5px; background-color: orange; border-color: orange;"
             pTooltip="Enviar E-mail de Recuperação de Senha da Organização" tooltipPosition="top" (click)="sendEmailPassword(company)"></button>
@@ -114,7 +116,7 @@
         <div class="col-12">
           <span class="p-float-label">
             <input type="text" pInputText [(ngModel)]="company.email" maxlength="200" required />
-            <label for="email">E-mail*</label>
+            <label for="email">E-mail de Acesso*</label>
           </span>
           <small class="p-error" *ngIf="!company.email">Este campo é obrigatório.</small>
         </div>
@@ -136,7 +138,7 @@
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <p-inputMask [(ngModel)]="company.cep" mask="99999-999"></p-inputMask>
+            <p-inputMask [(ngModel)]="company.cep" mask="99999-999" (onComplete)="checkCep(company)"></p-inputMask>
             <label for="cep">CEP*</label>
           </span>
           <small class="p-error" *ngIf="!company.cep">Este campo é obrigatório.</small>
@@ -145,21 +147,21 @@
       <div class="grid">
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.country" maxlength="50" required />
+            <input type="text" pInputText [(ngModel)]="company.country" maxlength="50" required=""/>
             <label for="country">País*</label>
           </span>
           <small class="p-error" *ngIf="!company.country">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.city" maxlength="50" required />
+            <input type="text" pInputText [(ngModel)]="company.city" maxlength="50" disabled />
             <label for="city">Cidade*</label>
           </span>
           <small class="p-error" *ngIf="!company.city">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.district" maxlength="50" required />
+            <input type="text" pInputText [(ngModel)]="company.district" maxlength="50" disabled />
             <label for="district">Bairro*</label>
           </span>
           <small class="p-error" *ngIf="!company.district">Este campo é obrigatório.</small>
@@ -168,21 +170,21 @@
       <div class="grid">
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.street" maxlength="100" required />
+            <input type="text" pInputText [(ngModel)]="company.street" maxlength="100" disabled />
             <label for="street">Rua*</label>
           </span>
           <small class="p-error" *ngIf="!company.street">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="number" pInputText [(ngModel)]="company.numberAddress" maxlength="10" required />
+            <input type="int" pInputText [(ngModel)]="company.numberAddress" maxlength="10" required />
             <label for="numberAddress">Número do Endereço*</label>
           </span>
           <small class="p-error" *ngIf="!company.numberAddress">Este campo é obrigatório.</small>
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.uf" maxlength="2" required />
+            <input type="text" pInputText [(ngModel)]="company.uf" maxlength="2" disabled />
             <label for="uf">UF*</label>
           </span>
           <small class="p-error" *ngIf="!company.uf">Este campo é obrigatório.</small>
@@ -193,18 +195,49 @@
           <span class="p-float-label">
             <textarea type="text" pInputText [(ngModel)]="company.description" [rows]="5" [cols]="30" maxlength="255"
               required></textarea>
-            <label for="description">Descrição*</label>
+            <label for="description">Descrição da Organização*</label>
           </span>
           <small class="p-error" *ngIf="!company.description">Este campo é obrigatório.</small>
         </div>
       </div>
       <div class="grid" *ngIf="!company.guid">
-        <div class="col-12">
+        <div class="col-6">
           <span class="p-float-label">
-            <input type="text" pInputText [(ngModel)]="company.password" maxlength="100" required />
+            <p-password [(ngModel)]="company.password" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira uma senha">
+            <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="p-mt-2">Sugestões</p>
+                <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                  <li>Pelo menos uma letra minúscula.</li>
+                  <li>Pelo menos uma letra maiúscula.</li>
+                  <li>Pelo menos um número.</li>
+                  <li>Mínimo de 8 caracteres.</li>
+                </ul>
+            </ng-template>
+            </p-password>
             <label for="password">Senha*</label>
           </span>
           <small class="p-error" *ngIf="!company.password">Este campo é obrigatório.</small>
+        </div>
+        <div class="col-6">
+          <span class="p-float-label">
+            <p-password [(ngModel)]="company.confirmPassword" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira a senha novamente.">
+              <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="p-mt-2">Sugestões</p>
+                <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                  <li>Pelo menos uma letra minúscula.</li>
+                  <li>Pelo menos uma letra maiúscula.</li>
+                  <li>Pelo menos um número.</li>
+                  <li>Mínimo de 8 caracteres.</li>
+                </ul>
+            </ng-template>
+            </p-password>
+            <label for="password">Confirme a Senha*</label>
+          </span>
+          <small class="p-error" *ngIf="!company.confirmPassword">Este campo é obrigatório.</small>
+          <br>
+          <small class="p-error" *ngIf="company.password != company.confirmPassword">As senhas não conferem.</small>
         </div>
       </div>
     </div>
@@ -214,7 +247,7 @@
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveCompany()"
       *ngIf="!company.guid" [disabled]="!company.name || !company.email || !company.document || !company.phone || !company.cep || !company.country
     || !company.city || !company.district || !company.street || !company.numberAddress || !company.uf || !company.description
-    || !company.password ? true : false"></button>
+    || !company.password || company.password != company.confirmPassword ? true : false"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="saveCompany()"
       *ngIf="company.guid" [disabled]="!company.name || !company.email || !company.document || !company.phone || !company.cep || !company.country
     || !company.city || !company.district || !company.street || !company.numberAddress || !company.uf

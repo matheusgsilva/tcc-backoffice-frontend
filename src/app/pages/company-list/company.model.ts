@@ -5,6 +5,7 @@ export class Company {
   document: string = "";
   phone: string = "";
   password: string = "";
+  confirmPassword: string = "";
   country: string = "";
   street: string = "";
   numberAddress: string = "";

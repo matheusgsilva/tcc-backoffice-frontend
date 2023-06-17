@@ -8,9 +8,11 @@
           <button pButton pRipple label="Excluir" icon="pi pi-trash" class="p-button-danger"
             (click)="deleteSelectedRatings()" [disabled]="!selectedRatings || !selectedRatings.length"></button>
         </div>
-        <div class="col-fixed">
-          <button pButton pRipple label="Atualizar" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
-        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <div class="col-fixed">
+        <button pButton pRipple label="Atualizar" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
       </div>
     </ng-template>
   </p-toolbar>

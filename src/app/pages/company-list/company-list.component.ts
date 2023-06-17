@@ -220,12 +220,20 @@ export class CompanyListComponent implements OnInit {
     this.company = new Company();
   }
 
-
   getMessage(code: number) {
     if (code == 200) {
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Operação realizada!', life: 3000 });
       this.list();
     } else
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Operação não realizada!', life: 3000 });
+  }
+
+  async checkCep(company: Company) {
+    this.cepResponse = new CepResponse();
+    await this.verifyCep(company.cep);
+    company.city = this.cepResponse.localidade;
+    company.street = this.cepResponse.logradouro;
+    company.uf = this.cepResponse.uf;
+    company.district = this.cepResponse.bairro;
   }
 }
