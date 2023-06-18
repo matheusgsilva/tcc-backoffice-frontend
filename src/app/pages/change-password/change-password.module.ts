@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { ChangePasswordComponent } from './change-password.component';
 import { ChangePassowordRoutingModule } from './change-password.routing.module';
 import { ToastModule } from 'primeng/toast';
+import { DividerModule } from 'primeng/divider';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { ToastModule } from 'primeng/toast';
     CardModule,
     ChangePassowordRoutingModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    DividerModule,
+    PasswordModule
   ],
   declarations: [
     ChangePasswordComponent

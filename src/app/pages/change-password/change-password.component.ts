@@ -17,7 +17,8 @@ export class ChangePasswordComponent implements OnInit {
 
   form = this.fb.group({
     email: new FormControl("", [Validators.required, Validators.email]),
-    password: new FormControl("", [Validators.required])
+    password: new FormControl("", [Validators.required]),
+    confirmPassword: new FormControl("", [Validators.required])
   });
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private loginService: LoginService, private messageService: MessageService) { }
@@ -37,5 +38,9 @@ export class ChangePasswordComponent implements OnInit {
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Operação realizada!', life: 3000 });
     } else
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Operação não realizada!', life: 3000 });
+  }
+
+  verifyDisable(){
+    return this.form.invalid || this.form.get('password')?.value != this.form.get('confirmPassword')?.value;
   }
 }

@@ -152,9 +152,9 @@ export class PetListComponent implements OnInit {
   openImageDialog(petGuid: string) {
     this.pet = new Pet();
     this.image1 = undefined;
-    this.petImageDialog = true;
     this.petService.detail(petGuid).subscribe((response => {
       this.pet = ((response as ResponseAPI).data as Pet);
+      this.petImageDialog = true;
       if (this.pet.photo1)
         this.image1 = this.sanitizer.bypassSecurityTrustResourceUrl(this.pet.photo1);
     }));
