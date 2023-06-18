@@ -236,4 +236,9 @@ export class CompanyListComponent implements OnInit {
     company.uf = this.cepResponse.uf;
     company.district = this.cepResponse.bairro;
   }
+
+  clean(dt: any){
+    this.filter = '';
+    dt.filterGlobal(this.filter, 'contains');
+  }
 }

@@ -6,4 +6,5 @@ export class User {
   phone: string = "";
   password: string = "";
   confirmPassword: string = "";
+  isAdmin: string = "";
 }

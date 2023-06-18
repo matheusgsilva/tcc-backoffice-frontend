@@ -201,4 +201,9 @@ export class PetListComponent implements OnInit {
   findNameSize(size: string){
     return this.size.filter(t => t.code == size)[0]?.name;
   }
+
+  clean(dt: any){
+    this.filter = '';
+    dt.filterGlobal(this.filter, 'contains');
+  }
 }

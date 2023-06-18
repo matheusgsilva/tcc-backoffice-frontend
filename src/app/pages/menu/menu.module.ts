@@ -33,9 +33,11 @@ import { RatingListComponent } from '../rating-list/rating-list.component';
 import { RatingModule } from 'primeng/rating';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   imports: [
+    InputSwitchModule,
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,

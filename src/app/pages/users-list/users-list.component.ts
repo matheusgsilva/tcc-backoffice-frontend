@@ -103,4 +103,9 @@ export class UsersListComponent implements OnInit {
     } else
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Operação não realizada!', life: 3000 });
   }
+
+  clean(dt: any){
+    this.filter = '';
+    dt.filterGlobal(this.filter, 'contains');
+  }
 }

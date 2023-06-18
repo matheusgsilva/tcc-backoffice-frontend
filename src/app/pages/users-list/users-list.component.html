@@ -15,7 +15,8 @@
     </ng-template>
     <ng-template pTemplate="right">
       <div class="col-fixed">
-        <button pButton pRipple label="Atualizar Tabela" icon="pi pi-undo" class="p-button-info" (click)="list()"></button>
+        <button pButton pRipple label="Atualizar Tabela" icon="pi pi-undo" class="p-button-info"
+          (click)="list()"></button>
       </div>
     </ng-template>
   </p-toolbar>
@@ -34,6 +35,7 @@
             <input pInputText type="text" [(ngModel)]="filter" (input)="dt.filterGlobal(filter, 'contains')"
               placeholder="Pesquisar..." />
           </span>
+          <button pButton pRipple type="button" icon="pi pi-times" class="p-button-danger p-button-outlined" pTooltip="Limpar Filtro" tooltipPosition="top" (click)="clean(dt)"></button>
         </div>
       </div>
     </ng-template>
@@ -96,12 +98,18 @@
         </div>
       </div>
       <div class="grid">
-        <div class="col-12">
+        <div class="col-8">
           <span class="p-float-label">
             <input type="text" pInputText [(ngModel)]="user.email" maxlength="200" required />
             <label for="email">E-mail*</label>
           </span>
           <small class="p-error" *ngIf="!user.email">Este campo é obrigatório.</small>
+        </div>
+        <div class="col-4" style="display: flex; align-items: center; margin-top: -20px;">
+          <label for="email" style="margin-left: 30px;">Administrador:</label>
+          <div style="padding-left: 10px; padding-top: 5px;">
+            <p-inputSwitch [(ngModel)]="user.isAdmin"></p-inputSwitch>
+          </div>
         </div>
       </div>
       <div class="grid">
@@ -123,25 +131,8 @@
       <div class="grid" *ngIf="!user.guid">
         <div class="col-6">
           <span class="p-float-label">
-            <p-password [(ngModel)]="user.password" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira uma senha">
-            <ng-template pTemplate="footer">
-                <p-divider></p-divider>
-                <p class="p-mt-2">Sugestões</p>
-                <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
-                  <li>Pelo menos uma letra minúscula.</li>
-                  <li>Pelo menos uma letra maiúscula.</li>
-                  <li>Pelo menos um número.</li>
-                  <li>Mínimo de 8 caracteres.</li>
-                </ul>
-            </ng-template>
-            </p-password>
-            <label for="password">Senha*</label>
-          </span>
-          <small class="p-error" *ngIf="!user.password">Este campo é obrigatório.</small>
-        </div>
-        <div class="col-6">
-          <span class="p-float-label">
-            <p-password [(ngModel)]="user.confirmPassword" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira a senha novamente.">
+            <p-password [(ngModel)]="user.password" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca"
+              mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira uma senha">
               <ng-template pTemplate="footer">
                 <p-divider></p-divider>
                 <p class="p-mt-2">Sugestões</p>
@@ -151,7 +142,26 @@
                   <li>Pelo menos um número.</li>
                   <li>Mínimo de 8 caracteres.</li>
                 </ul>
-            </ng-template>
+              </ng-template>
+            </p-password>
+            <label for="password">Senha*</label>
+          </span>
+          <small class="p-error" *ngIf="!user.password">Este campo é obrigatório.</small>
+        </div>
+        <div class="col-6">
+          <span class="p-float-label">
+            <p-password [(ngModel)]="user.confirmPassword" [toggleMask]="true" appendTo="body" weakLabel="Senha Fraca"
+              mediumLabel="Senha Média" strongLabel="Senha Forte" promptLabel="Insira a senha novamente.">
+              <ng-template pTemplate="footer">
+                <p-divider></p-divider>
+                <p class="p-mt-2">Sugestões</p>
+                <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                  <li>Pelo menos uma letra minúscula.</li>
+                  <li>Pelo menos uma letra maiúscula.</li>
+                  <li>Pelo menos um número.</li>
+                  <li>Mínimo de 8 caracteres.</li>
+                </ul>
+              </ng-template>
             </p-password>
             <label for="password">Confirme a Senha*</label>
           </span>

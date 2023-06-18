@@ -34,6 +34,7 @@
             <input pInputText type="text" [(ngModel)]="filter" (input)="dt.filterGlobal(filter, 'contains')"
               placeholder="Pesquisar..." />
           </span>
+          <button pButton pRipple type="button" icon="pi pi-times" class="p-button-danger p-button-outlined" pTooltip="Limpar Filtro" tooltipPosition="top" (click)="clean(dt)"></button>
         </div>
       </div>
     </ng-template>
