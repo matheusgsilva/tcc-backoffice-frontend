@@ -17,6 +17,7 @@ import { PetService } from './pet.service';
 })
 export class PetListComponent implements OnInit {
 
+  loading = false;
   petDialog: boolean = false;
   petImageDialog: boolean = false;
 
@@ -80,7 +81,11 @@ export class PetListComponent implements OnInit {
   }
 
   list() {
-    this.petService.list(this.selectedCompany).subscribe(response => this.pets = (response as ResponseAPI).data as Pet[] || []);
+    this.loading = true;
+    this.petService.list(this.selectedCompany).subscribe(response => {
+      this.pets = (response as ResponseAPI).data as Pet[] || [];
+      this.loading = false;
+    });
   }
 
   openNew() {

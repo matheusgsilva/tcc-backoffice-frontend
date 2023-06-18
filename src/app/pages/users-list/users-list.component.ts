@@ -14,6 +14,7 @@ import { UsersService } from './users.service';
 })
 export class UsersListComponent implements OnInit {
 
+  loading = false;
   userDialog: boolean = false;
 
   filter: string = "";
@@ -31,7 +32,11 @@ export class UsersListComponent implements OnInit {
   }
 
   list() {
-    this.userService.list().subscribe(response => this.users = (response as ResponseAPI).data as User[] || []);
+    this.loading = true;
+    this.userService.list().subscribe(response => {
+      this.users = (response as ResponseAPI).data as User[] || [];
+      this.loading = false;
+    });
   }
 
   openNew() {

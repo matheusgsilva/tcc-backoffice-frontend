@@ -17,6 +17,7 @@ import { RatingService } from './rating.service';
 })
 export class RatingListComponent implements OnInit {
 
+  loading = false;
   filter: string = "";
 
   rating: Rating = new Rating();
@@ -41,7 +42,11 @@ export class RatingListComponent implements OnInit {
   }
 
   list() {
-    this.ratingService.list(this.selectedCompany).subscribe(response => this.ratings = (response as ResponseAPI).data as Rating[] || []);
+    this.loading = true;
+    this.ratingService.list(this.selectedCompany).subscribe(response => {
+      this.ratings = (response as ResponseAPI).data as Rating[] || [];
+      this.loading = false;
+    });
   }
 
   deleteSelectedRatings() {

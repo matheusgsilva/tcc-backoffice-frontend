@@ -22,8 +22,8 @@
   </p-toolbar>
 
   <p-table #dt [value]="pets" [rows]="10" [paginator]="true" [style]="{'margin-top':'20px'}"
-    [globalFilterFields]="['typePet','breed','size','age']" responsiveLayout="stack" [(selection)]="selectedPets"
-    [rowHover]="true" dataKey="guid" [showCurrentPageReport]="false">
+    [globalFilterFields]="['typePet','breed','size','age', 'identification']" responsiveLayout="stack" [(selection)]="selectedPets"
+    [rowHover]="true" dataKey="guid" [showCurrentPageReport]="false" [loading]="loading">
     <ng-template pTemplate="caption">
       <div class="grid">
         <div class="col">

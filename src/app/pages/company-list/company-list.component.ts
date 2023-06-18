@@ -15,6 +15,7 @@ import { CompanyService } from './company.service';
 })
 export class CompanyListComponent implements OnInit {
 
+  loading = false;
   companyDialog: boolean = false;
   validationDialog: boolean = false;
   companyImageDialog: boolean = false;
@@ -40,7 +41,11 @@ export class CompanyListComponent implements OnInit {
   }
 
   list() {
-    this.companyService.list().subscribe(response => this.companies = (response as ResponseAPI).data as Company[] || []);
+    this.loading = true;
+    this.companyService.list().subscribe(response => {
+      this.companies = (response as ResponseAPI).data as Company[] || [];
+      this.loading = false;
+    });
   }
 
   openNew() {
