@@ -106,7 +106,7 @@
           <small class="p-error" *ngIf="!user.email">Este campo é obrigatório.</small>
         </div>
         <div class="col-4" style="display: flex; align-items: center; margin-top: -20px;">
-          <label for="email" style="margin-left: 30px;">Administrador:</label>
+          <label for="email" style="margin-left: 30px;">Administrador: {{ user.isAdmin ? 'Sim' : 'Não' }}</label>
           <div style="padding-left: 10px; padding-top: 5px;">
             <p-inputSwitch [(ngModel)]="user.isAdmin"></p-inputSwitch>
           </div>
