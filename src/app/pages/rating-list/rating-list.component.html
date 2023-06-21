@@ -18,7 +18,7 @@
   </p-toolbar>
 
   <p-table #dt [value]="ratings" [rows]="10" [paginator]="true" [style]="{'margin-top':'20px'}"
-    [globalFilterFields]="['name','email','document','phone']" responsiveLayout="stack" [(selection)]="selectedRatings"
+    [globalFilterFields]="['company','user']" responsiveLayout="stack" [(selection)]="selectedRatings"
     [rowHover]="true" dataKey="guid" [showCurrentPageReport]="false" [loading]="loading">
     <ng-template pTemplate="caption">
       <div class="grid">
