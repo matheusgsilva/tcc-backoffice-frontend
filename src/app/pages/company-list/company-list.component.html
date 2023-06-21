@@ -132,7 +132,7 @@
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="int" pInputText [(ngModel)]="company.phone" maxlength="11" required />
+            <p-inputMask [(ngModel)]="company.phone" mask="99999999999"></p-inputMask>
             <label for="phone">Telefone*</label>
           </span>
           <small class="p-error" *ngIf="!company.phone">Este campo é obrigatório.</small>
@@ -178,7 +178,7 @@
         </div>
         <div class="col-4">
           <span class="p-float-label">
-            <input type="int" pInputText [(ngModel)]="company.numberAddress" maxlength="10" required />
+            <input type="text" pInputText [(ngModel)]="company.numberAddress" maxlength="10" required />
             <label for="numberAddress">Número do Endereço*</label>
           </span>
           <small class="p-error" *ngIf="!company.numberAddress">Este campo é obrigatório.</small>

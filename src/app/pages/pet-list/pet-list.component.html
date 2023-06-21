@@ -116,7 +116,7 @@
       <div class="grid" *ngIf="pet.typePet?.code == 'Cachorro'">
         <div class="col-12">
           <span class="p-float-label">
-            <p-dropdown [options]="breed" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false" [editable]="true"></p-dropdown>
+            <p-dropdown [options]="breed" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false"></p-dropdown>
             <label for="breed">Raça*</label>
           </span>
           <small class="p-error" *ngIf="!pet.breed">Este campo é obrigatório.</small>
