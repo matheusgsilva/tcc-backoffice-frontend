@@ -29,4 +29,25 @@ export class PetService {
   list(companyGuid: string) {
     return this.http.get(environment.url + API_ENDPOINTS.PET.LIST + companyGuid);
   }
+
+  sendImageAsFormData(convertedImage: string): Promise<any> {
+    const formData = new FormData();
+    const blob = this.dataURItoBlob(convertedImage);
+    formData.append('image', blob, 'image.jpg');
+
+    return this.http.post(environment.urlImageServer, formData).toPromise();
+  }
+
+  dataURItoBlob(dataURI: string): Blob {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([arrayBuffer], { type: mimeString });
+  }
 }

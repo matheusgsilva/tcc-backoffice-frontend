@@ -6,7 +6,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { ResponseAPI } from 'src/app/shared/response.model';
 import { Company } from '../company-list/company.model';
 import { CompanyService } from '../company-list/company.service';
-import { Pet } from './pet.model';
+import { ImagePredict, Pet } from './pet.model';
 import { PetService } from './pet.service';
 
 @Component({
@@ -123,6 +123,7 @@ export class PetListComponent implements OnInit {
     this.loading = true;
     this.petService.list(this.selectedCompany).subscribe(response => {
       this.pets = (response as ResponseAPI).data as Pet[] || [];
+      this.verifyImagesForPets(this.pets);
       this.loading = false;
     });
   }
@@ -164,7 +165,7 @@ export class PetListComponent implements OnInit {
     }
 
     this.petDialog = true;
-}
+  }
 
 
   deletePet(pet: Pet) {
@@ -258,5 +259,31 @@ export class PetListComponent implements OnInit {
   clean(dt: any) {
     this.filter = '';
     dt.filterGlobal(this.filter, 'contains');
+  }
+
+  async verifyImagesForPets(pets: Pet[]) {
+    for (const pet of pets) {
+      await this.verifyImage(pet);
+    }
+  }
+
+  async verifyImage(pet: Pet) {
+    if (!pet.imageVerified) {
+      if (pet.photo1) {
+        await this.petService.sendImageAsFormData(pet.photo1)
+          .then((response: ImagePredict) => {
+            pet.imageConfidence = response.confidence;
+            pet.imageResult = response.result;
+          })
+          .catch((error) => {
+            console.error(error);
+          })
+          .finally(() => {
+            pet.imageVerified = true;
+          });
+      }else{
+        pet.imageVerified = false;
+      }
+    }
   }
 }

@@ -16,4 +16,12 @@ export class Pet{
   companyGuid!: string;
   guid!: string;
   identification!: string;
+  imageVerified: boolean = false;
+  imageConfidence!: string;
+  imageResult!: string;
+}
+
+export class ImagePredict {
+  confidence!: string;
+  result!: string;
 }
