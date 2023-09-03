@@ -40,26 +40,65 @@ export class PetListComponent implements OnInit {
     { name: 'Fêmea', code: 'F' }
   ];
 
-  breed: any[] = [
-    { name: "SRD", code: "SRD" },
+  dogVaccines = [
+    { name: "V8 (Polivalente)", code: "V8" },
+    { name: "V10 (Polivalente)", code: "V10" },
+    { name: "Raiva", code: "Raiva" },
+    { name: "Tosse dos Canis (Traqueobronquite)", code: "TosseCanis" },
+    { name: "Leishmaniose", code: "Leishmaniose" },
+    { name: "Giardíase", code: "Giardíase" },
+    { name: "Leptospirose", code: "Leptospirose" },
+    { name: "Parvovirose", code: "Parvovirose" },
+    { name: "Cinomose", code: "Cinomose" },
+    { name: "Coronavírus Canino", code: "Coronavírus" }
+  ];
+
+  catVaccines = [
+    { name: "Tríplice Felina (FVRCP)", code: "TrípliceFelina" },
+    { name: "Quádrupla Felina", code: "QuádruplaFelina" },
+    { name: "Raiva", code: "Raiva" },
+    { name: "Leucemia Felina (FeLV)", code: "LeucemiaFelina" },
+    { name: "Imunodeficiência Felina (FIV)", code: "ImunodeficiênciaFelina" },
+    { name: "Peritonite Infecciosa Felina (PIF)", code: "PeritoniteInfecciosa" },
+    { name: "Clamidiose", code: "Clamidiose" }
+  ];
+
+  dogBreeds = [
+    { name: "SRD (Sem Raça Definida)", code: "SRD" },
     { name: "Akita", code: "Akita" },
     { name: "Rottweiler", code: "Rottweiler" },
-    { name: "Dashing Hound", code: "Dashing Hound" },
+    { name: "Dachshund (Teckel)", code: "Dachshund" },
     { name: "Beagle", code: "Beagle" },
-    { name: "Shiba", code: "Shiba" },
-    { name: "Poddle", code: "Poddle" },
-    { name: "Pit bull", code: "Pit bull" },
+    { name: "Shiba Inu", code: "ShibaInu" },
+    { name: "Poodle", code: "Poodle" },
+    { name: "Pit Bull Terrier", code: "PitBull" },
     { name: "Pug", code: "Pug" },
     { name: "Chihuahua", code: "Chihuahua" },
-    { name: "Shar-pei", code: "Shar-pei" },
-    { name: "Pinscher", code: "Pinscher" }
+    { name: "Shar-Pei", code: "SharPei" },
+    { name: "Pinscher", code: "Pinscher" },
+    { name: "Labrador Retriever", code: "Labrador" },
+    { name: "Golden Retriever", code: "Golden" },
+    { name: "Bulldog", code: "Bulldog" }
+  ];
+
+  catBreeds = [
+    { name: "SRD (Sem Raça Definida)", code: "SRD" },
+    { name: "Persa", code: "Persa" },
+    { name: "Maine Coon", code: "MaineCoon" },
+    { name: "Siamese", code: "Siamese" },
+    { name: "Bengal", code: "Bengal" },
+    { name: "Sphynx", code: "Sphynx" },
+    { name: "Ragdoll", code: "Ragdoll" },
+    { name: "British Shorthair", code: "BritishShorthair" },
+    { name: "Scottish Fold", code: "ScottishFold" },
+    { name: "Abyssinian", code: "Abyssinian" },
+    { name: "Oriental", code: "Oriental" },
+    { name: "Siberian", code: "Siberian" }
   ];
 
   typePet: any[] = [
     { code: "Cachorro", name: "Cachorro" },
-    { code: "Gato", name: "Gato" },
-    { code: "Passarinho", name: "Passarinho" },
-    { code: "Coelho", name: "Coelho" }
+    { code: "Gato", name: "Gato" }
   ];
 
   size: any[] = [
@@ -111,13 +150,22 @@ export class PetListComponent implements OnInit {
 
   editPet(pet: Pet) {
     this.pet = { ...pet };
-    this.pet.gender = this.gender.filter(g => g.code == pet.gender)[0];
-    let breed = this.breed.filter(b => b.code == pet.breed);
-    this.pet.breed = breed.length > 0 ? breed[0] : this.pet.breed;
-    this.pet.typePet = this.typePet.filter(t => t.code == pet.typePet)[0];
-    this.pet.size = this.size.filter(t => t.code == pet.size)[0];
+
+    this.pet.gender = this.gender.find(g => g.code == pet.gender);
+    this.pet.typePet = this.typePet.find(t => t.code == pet.typePet);
+    this.pet.size = this.size.find(s => s.code == pet.size);
+
+    if (pet.typePet == "Cachorro") {
+      this.pet.breed = this.dogBreeds.find(b => b.code == pet.breed) || this.pet.breed;
+      this.pet.vaccines = this.dogVaccines.filter(vaccine => pet.vaccines.includes(vaccine.code));
+    } else {
+      this.pet.breed = this.catBreeds.find(b => b.code == pet.breed) || this.pet.breed;
+      this.pet.vaccines = this.catVaccines.filter(vaccine => pet.vaccines.includes(vaccine.code));
+    }
+
     this.petDialog = true;
-  }
+}
+
 
   deletePet(pet: Pet) {
     this.confirmationService.confirm({
@@ -138,11 +186,11 @@ export class PetListComponent implements OnInit {
 
   savePet() {
     if (this.pets.filter(s => s.guid == this.pet?.guid).length == 0)
-      this.petService.add({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.typePet.code == "Cachorro" ? this.pet.breed.code : "", typePet: this.pet.typePet.code, size: this.pet.size.code }, this.selectedCompany).subscribe(response => {
+      this.petService.add({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.breed.code, typePet: this.pet.typePet.code, size: this.pet.size.code, vaccines: this.pet?.vaccines?.map(vaccine => vaccine.code) }, this.selectedCompany).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     else
-      this.petService.update({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.typePet.code == "Cachorro" ? this.pet.breed.code : "", typePet: this.pet.typePet.code, size: this.pet.size.code }, this.pet.guid).subscribe(response => {
+      this.petService.update({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.breed.code, typePet: this.pet.typePet.code, size: this.pet.size.code, vaccines: this.pet?.vaccines?.map(vaccine => vaccine.code) }, this.pet.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     this.petDialog = false;
@@ -199,15 +247,15 @@ export class PetListComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Operação não realizada!', life: 3000 });
   }
 
-  findNameTypePet(typePet: string){
+  findNameTypePet(typePet: string) {
     return this.typePet.filter(t => t.code == typePet)[0]?.name;
   }
 
-  findNameSize(size: string){
+  findNameSize(size: string) {
     return this.size.filter(t => t.code == size)[0]?.name;
   }
 
-  clean(dt: any){
+  clean(dt: any) {
     this.filter = '';
     dt.filterGlobal(this.filter, 'contains');
   }

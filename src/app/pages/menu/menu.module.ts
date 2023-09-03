@@ -34,6 +34,8 @@ import { RatingModule } from 'primeng/rating';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {MultiSelectModule} from 'primeng/multiselect';
+
 
 @NgModule({
   imports: [
@@ -66,7 +68,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     FileUploadModule,
     FieldsetModule,
     ImageModule,
-    RatingModule
+    RatingModule,
+    MultiSelectModule
   ],
   declarations: [
     UsersListComponent,

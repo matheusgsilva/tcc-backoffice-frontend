@@ -100,7 +100,7 @@
       <div class="grid">
         <div class="col-6">
           <span class="p-float-label">
-            <p-dropdown [options]="typePet" [(ngModel)]="pet.typePet" optionLabel="name" appendTo="body" [showClear]="true"></p-dropdown>
+            <p-dropdown [options]="typePet" [(ngModel)]="pet.typePet" optionLabel="name" appendTo="body" [showClear]="true" [disabled]="!!pet.guid"></p-dropdown>
             <label for="typePet">Animal*</label>
           </span>
           <small class="p-error" *ngIf="!pet.typePet">Este campo é obrigatório.</small>
@@ -113,10 +113,14 @@
           <small class="p-error" *ngIf="!pet.gender">Este campo é obrigatório.</small>
         </div>
       </div>
-      <div class="grid" *ngIf="pet.typePet?.code == 'Cachorro'">
+      <div class="grid">
         <div class="col-12">
-          <span class="p-float-label">
-            <p-dropdown [options]="breed" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false"></p-dropdown>
+          <span class="p-float-label" *ngIf="pet.typePet?.code == 'Cachorro'">
+            <p-dropdown [options]="dogBreeds" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false"></p-dropdown>
+            <label for="breed">Raça*</label>
+          </span>
+          <span class="p-float-label" *ngIf="pet.typePet?.code == 'Gato'">
+            <p-dropdown [options]="catBreeds" [(ngModel)]="pet.breed" optionLabel="name" appendTo="body" [showClear]="true" [autoDisplayFirst]="false"></p-dropdown>
             <label for="breed">Raça*</label>
           </span>
           <small class="p-error" *ngIf="!pet.breed">Este campo é obrigatório.</small>
@@ -149,9 +153,13 @@
       </div>
       <div class="grid">
         <div class="col-12">
-          <span class="p-float-label">
-            <textarea type="text" pInputText [(ngModel)]="pet.vaccines" [rows]="5" [cols]="30"></textarea>
-            <label for="vaccines">Vacinas Tomadas (Ex.: v12, V8)</label>
+          <span class="p-float-label" *ngIf="pet.typePet?.code == 'Cachorro'">
+            <p-multiSelect [options]="dogVaccines" [(ngModel)]="pet.vaccines" optionLabel="name" appendTo="body"></p-multiSelect>
+            <label for="vaccines">Vacinas Tomadas</label>
+          </span>
+          <span class="p-float-label" *ngIf="pet.typePet?.code == 'Gato'">
+            <p-multiSelect [options]="catVaccines" [(ngModel)]="pet.vaccines" optionLabel="name" appendTo="body"></p-multiSelect>
+            <label for="vaccines">Vacinas Tomadas</label>
           </span>
         </div>
       </div>

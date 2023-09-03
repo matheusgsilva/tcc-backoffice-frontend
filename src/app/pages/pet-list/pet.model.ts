@@ -6,7 +6,7 @@ export class Pet{
   age!: string;
   birthDate!: string;
   breed!: any;
-  vaccines!: string;
+  vaccines!: any[];
   color!: string;
   photo1!: string;
   photo2!: string;
