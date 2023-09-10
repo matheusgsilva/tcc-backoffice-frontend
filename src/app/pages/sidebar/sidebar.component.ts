@@ -63,4 +63,8 @@ export class SidebarComponent implements OnInit {
         item.style.backgroundColor = "white";
     });
   }
+
+  getUser(){
+    return localStorage['userName'];
+  }
 }

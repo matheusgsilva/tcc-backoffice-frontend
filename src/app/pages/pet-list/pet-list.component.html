@@ -22,7 +22,7 @@
   </p-toolbar>
 
   <p-table #dt [value]="pets" [rows]="10" [paginator]="true" [style]="{'margin-top':'20px'}"
-    [globalFilterFields]="['typePet','breed','size','age', 'identification']" responsiveLayout="stack" [(selection)]="selectedPets"
+    [globalFilterFields]="['typePet','breed','size','age', 'identification', 'pet.imageConfidence', 'pet.imageResult']" responsiveLayout="stack" [(selection)]="selectedPets"
     [rowHover]="true" dataKey="guid" [showCurrentPageReport]="false" [loading]="loading">
     <ng-template pTemplate="caption">
       <div class="grid">
@@ -75,7 +75,7 @@
         <td>{{pet.breed ? pet.breed : "N.A."}}</td>
         <td>{{findNameSize(pet.size)}}</td>
         <td>{{pet.age}}</td>
-        <td *ngIf="pet.imageConfidence && pet.imageResult && pet.photo1" style="color: green;">
+        <td *ngIf="pet.imageConfidence && pet.imageResult && pet.photo1 && pet?.imageResult?.includes(pet.typePet)" style="color: green;">
           <div style="display: flex; align-items: center;">
             <i class="pi pi-check" style="vertical-align: middle;"></i>
             <div style="margin-left: 10px;">
@@ -104,7 +104,17 @@
           <div style="display: flex; align-items: center;">
             <i class="pi pi-exclamation-triangle" style="vertical-align: middle;"></i>
             <div style="margin-left: 10px;">
-              <div>Pendente</div>
+              <div>Pendente Imagem do Pet</div>
+            </div>
+          </div>
+        </td>
+        <td *ngIf="pet.imageConfidence && pet.imageResult && pet.photo1 && !pet?.imageResult?.includes(pet.typePet)" style="color: red;">
+          <div style="display: flex; align-items: center;">
+            <i class="pi pi-exclamation-circle" style="vertical-align: middle;"></i>
+            <div style="margin-left: 10px;">
+              <div>Divergência no Tipo do Pet</div>
+              <div>Acertividade: {{pet.imageConfidence}}</div>
+              <div>{{pet.imageResult}}</div>
             </div>
           </div>
         </td>

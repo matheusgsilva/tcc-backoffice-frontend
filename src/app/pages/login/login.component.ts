@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
           localStorage["token"] = response.data.token;
           localStorage["email"] = response.data.email;
           localStorage["userGuid"] = response.data.guid;
+          localStorage["userName"] = response.data.userName;
           this.router.navigate([""]);
         } else {
           this.unauthorized();
