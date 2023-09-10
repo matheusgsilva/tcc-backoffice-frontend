@@ -21,7 +21,7 @@ pipeline {
 
         stage('Serve') {
             steps {
-                bat 'npm start'
+               bat 'C:\\Users\\Desktop\\AppData\\Roaming\\npm\\ng serve --host 0.0.0.0'
             }
         }
     }

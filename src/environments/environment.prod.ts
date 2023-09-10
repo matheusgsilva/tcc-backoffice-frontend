@@ -3,3 +3,5 @@ export const environment = {
   url: "http://localhost:9595/",
   urlImageServer: 'http://localhost:5000/predict',
 };
+
+
