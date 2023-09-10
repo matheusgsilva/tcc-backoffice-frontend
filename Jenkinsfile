@@ -21,7 +21,7 @@ pipeline {
 
         stage('Serve') {
             steps {
-                bat 'ng serve --host 0.0.0.0'
+                bat 'npm start'
             }
         }
     }
