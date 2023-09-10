@@ -19,6 +19,14 @@ pipeline {
             }
         }
 
+       stage('Install Dependencies') {
+            steps {
+                script {
+                    bat 'C:\\Users\\Desktop\\AppData\\Roaming\\npm\\npm install'
+                }
+            }
+        }
+
         stage('Serve') {
             steps {
                bat 'C:\\Users\\Desktop\\AppData\\Roaming\\npm\\ng serve --host 0.0.0.0'
