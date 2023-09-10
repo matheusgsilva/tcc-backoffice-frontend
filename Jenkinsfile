@@ -22,7 +22,7 @@ pipeline {
        stage('Install Dependencies') {
             steps {
                 script {
-                    bat 'C:\\Users\\Desktop\\AppData\\Roaming\\npm\\npm install'
+                   bat 'D:\\Node JS\\npm install'
                 }
             }
         }
