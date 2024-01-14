@@ -187,11 +187,11 @@ export class PetListComponent implements OnInit {
 
   savePet() {
     if (this.pets.filter(s => s.guid == this.pet?.guid).length == 0)
-      this.petService.add({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.breed.code, typePet: this.pet.typePet.code, size: this.pet.size.code, vaccines: this.pet?.vaccines?.map(vaccine => vaccine.code) }, this.selectedCompany).subscribe(response => {
+      this.petService.add({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.breed ? this.pet.breed.code : null, typePet: this.pet.typePet.code, size: this.pet.size.code, vaccines: this.pet?.vaccines?.map(vaccine => vaccine.code) }, this.selectedCompany).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     else
-      this.petService.update({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.breed.code, typePet: this.pet.typePet.code, size: this.pet.size.code, vaccines: this.pet?.vaccines?.map(vaccine => vaccine.code) }, this.pet.guid).subscribe(response => {
+      this.petService.update({ ...this.pet, gender: this.pet.gender.code, breed: this.pet.breed ? this.pet.breed.code : null, typePet: this.pet.typePet.code, size: this.pet.size.code, vaccines: this.pet?.vaccines?.map(vaccine => vaccine.code) }, this.pet.guid).subscribe(response => {
         this.getMessage((response as ResponseAPI).code);
       }, () => this.getMessage(404));
     this.petDialog = false;

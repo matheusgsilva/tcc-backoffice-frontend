@@ -220,7 +220,7 @@
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-danger" (click)="hideDialog()"></button>
     <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button-success" (click)="savePet()"
-      [disabled]="!pet.typePet || !pet.gender || pet.typePet.code == 'Cachorro' ? !pet.breed : false|| !pet.size || !pet.birthDate || !pet.color ? true : false"></button>
+      [disabled]="!pet.typePet || !pet.gender || !pet.breed || !pet.size || !pet.birthDate || !pet.color ? true : false"></button>
   </ng-template>
 </p-dialog>
 
